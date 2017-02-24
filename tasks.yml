@@ -1,25 +1,105 @@
 Question1:
-  background: Variables are very useful in Matlab. They hold values that can be passed as arguments in functions
-  question: Define a variable "a" with the value "1"
-  type: string
-  evaluation: [a=1, a = 1, a =1, a= 1]
-  preeval: []
+  background: |
+    Satements have the form:
+    >> variable = expression
+    Equality "=" implies the assignment of the expression to the variable. The command prompt
+    is represented by two right arrows ">>"
+    The assignment of value 1 to the variable a is executed after the enter key is pressed.
+    >> a = 1
+    You can observe that after the assignment, the value that is stored in the variable is printed
+    on the screen. Printing all the values of all the variables can affect a lot the speed of
+    execution of your program. To suppress the output of any assignment or result, use the semicolon (;)
+    in a statement
+    >> a = 1; #Does not print any result. Now try it yourself.
+  question: Define a variable "a" with the value "56"
+  type: commands
+  evaluation: ['exist(''a'',''var'')', 'a==56']
+  preeval: [clear('a')]
   posteval: [clear('a')]
 Question2:
-  background: More about variables
-  question: Ready for a challenge? Define "b" equal to "1"!
+  background: |
+    In MATLAB (and in mathematics in general) there is a difference between a row (line) and a column vector.
+    It is very important to define the correct type of vector each time, because calculations can
+    be wrong otherwise. To define a vector, we use the square brackets '[' (to denote the beginning of the vector) and ']' (to denote the end of the vector). The numbers we place between the brackets are the vector elements. For a row vector the element can be separated either by spaces or by commas.
+
+    >> t = [1 2 3 4 5 6 7 8];
+    >> k = [1,2,3,4,5,6,7,8];
+
+    Row vectors t and k are identical. Let's try to make a row vector
+  question: Define a row vector 'm' with 8 random elements
   type: commands
-  evaluation: ['exist(''b'',''var'')', b==1]
-  preeval: []
-  posteval: [clear('b')]
+  evaluation: ['exist(''m'',''var'')', 'size(m)==[1,8]']
+  preeval: [clear('m')]
+  posteval: [clear('m')]
 Question3:
   background: |
-    In case the background is very lengthy,
-    this is how you define multiple lines in the field
-    (yeah, you just add a pipe '|' and then indent the following lines.
-    Each line will appear as a line in the tutorial as well.
-  question: What do you think? Will it work?
-  type: string
-  evaluation: ['yes','yes!','definitely!!']
-  preeval: []
-  posteval: [spy]
+    To define column vectores, the syntax is very similar. Instead of using spaces or commas, you
+    need to use semicolons (;) to separate the elements.
+
+    >> c = [1;2;3;4;5;6;7;8];
+
+    This results in a vector that looks like this:
+    c=[1
+    2
+    3
+    4
+    5
+    6
+    7
+    8]
+    Do you think you are ready to define your first column element?
+  question: Define a column vector 'p' with exactly 6 elements
+  type: commands
+  evaluation: ['exist(''p'',''var'')', 'size(p)==[6,1]']
+  preeval: [clear('p')]
+  posteval: [clear('p')]
+Question4:
+    background: |
+      Sometimes, we need several sequences of numbers for our MATLAB programs. When you need a very
+      big sequence of numbers, it is unpractical to type all the numbers by hand. Luckily MATLAB has
+      a quick way to generate them, using the colon symbol (:)
+      You can create a sequence of integers by specifying the first and last integer, separated by a
+      colon
+
+      >> 1:20
+      ans =
+        1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+
+      By default, the sequence is created by incrementing by 1, but different increments can be chosen.
+      Simply sandwich the increment that you want between the first and last value, and separate by a colon.
+
+      >> 1:5:20
+      ans =
+        1 5 10 15 20
+
+      You can also use a decimal or a negative number as an increment!
+      Go ahead and try it!
+    question: Define a row vector 'b' with numbers from 4 until 52 with an increment of 8
+    type: commands
+    evaluation: ['exist(''b'',''var'')','b==4:8:52']
+    preeval: [clear('b')]
+    posteval: [clear('b')]
+Question5:
+    background: |
+      Creating vectors and sequences are not all that we want to do in MATLAB. We need to operate on them.
+      You can do several things with vectors, such as add values to them. As in mathematics, if we add
+      a value to a vector, this value is actually added on each of the elements.
+      Let's assume we have the vector b you just created
+      >> b=4:8:52
+      ans =
+        b = 4 12 20 28 36 44 52
+
+      We can add the value 5 on the vector, as simple as this:
+      >> c=b+2
+      ans
+        c = 9 17 25 33 41 49 57
+
+      We can also add two vectors together, but only if they are the same dimensions (same length and both row or colomn vectors)
+      >> a=b+c
+      ans
+        a = 13 29 45 61 77 93
+    question: Write the command to calculate the difference between vectors c and b from the previous example and store it in variable 'a'
+    type: commands
+    evaluation: ['exist(''a'',''var'')','prod(size(a)==[1,7])','a==[5 5 5 5 5 5 5]']
+    preeval: ['b=4:8:52','c=b+5']
+    posteval: ['clear(''b'')','clear(''c'')','clear(''a'')']
