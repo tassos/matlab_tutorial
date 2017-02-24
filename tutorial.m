@@ -41,13 +41,12 @@ function tutorial
         if ~repeat
             fprintf('=====================================================\n\n')
             % Print the background information
-            fprintf([tasks{level}{1},'\n\n\n'])
-
+            fprintf([tasks{level}{1},'\n\n'])
             fprintf('=====================================================\n\n')
+            
+            % Print the question and wait for input from the user
+            answer = input(['Question ',num2str(level),'/',num2str(length(tasks)),':\n\n',tasks{level}{2},': '],'s');
         end
-        
-        % Print the question and wait for input from the user
-        answer = input(['Question ',num2str(level),'/',num2str(length(tasks)),':\n\n',tasks{level}{2},': '],'s');
         
         switch tasks{level}{4}
             case 'string'
@@ -65,14 +64,10 @@ function tutorial
                 try
                     eval([answer,';']);
                 catch
+                    correct = 0;
                 end
                 while (command<=length(tasks{level}{3}) && correct>0)
-                    try
-                        correct = eval(tasks{level}{3}{command})*correct;
-                    catch
-                        correct = 0;
-                        break
-                    end
+                    correct = eval(tasks{level}{3}{command})*correct;
                     command = command+1;
                 end
         end
@@ -88,9 +83,6 @@ function tutorial
             fprintf([retry{randperm(numel(retry),1)},'\n\n']) %#ok<USENS> Loaded at the beginning of the function
             repeat = 1;
         end
-        
-        % Post-question cleaning up. Just to make sure that there are no
-        % variables that could cause problems later on.
     end
     
     % When all questions are completed, then contratulate the user and
