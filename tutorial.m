@@ -33,15 +33,18 @@ function tutorial
         progress.(user) = 1;
     end
     level = progress.(user);
+    repeat = 0;
 
     % Loop over all the questions
     while level<=length(tasks) %#ok<USENS> This variable is loaded from the file above
+        if ~repeat
+            fprintf('=====================================================\n\n')
+            % Print the background information
+            fprintf([tasks{level}{1},'\n\n\n'])
+
+            fprintf('=====================================================\n\n')
+        end
         
-        fprintf('=====================================================\n\n')
-        % Print the background information
-        fprintf([tasks{level}{1},'\n\n\n'])
-        
-        fprintf('=====================================================\n\n')
         % Print the question and wait for input from the user
         answer = input(['Question ',num2str(level),'/',num2str(length(tasks)),':\n\n',tasks{level}{2},': '],'s');
         
@@ -53,8 +56,10 @@ function tutorial
             level = level+1;
             progress.(user) = level;
             save('progress.mat','progress')
+            repeat = 0;
         else
             fprintf('This is not a general way of doing things, maybe try again?\n')
+            repeat = 1;
         end
     end
     
