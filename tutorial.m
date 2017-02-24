@@ -26,7 +26,7 @@ function tutorial
     end
     
     % Getting the username, for storing progress of a student
-    user = input('Please provide your username: ','s');
+    user = input('Please provide your username (no numbers please): ','s');
     users = fieldnames(progress);
     
     % Checking if the user exists. If not, then create her
