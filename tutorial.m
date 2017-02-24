@@ -48,10 +48,32 @@ function tutorial
         % Print the question and wait for input from the user
         answer = input(['Question ',num2str(level),'/',num2str(length(tasks)),':\n\n',tasks{level}{2},': '],'s');
         
-        % Check if the input matches the possible answers registered. If
-        % yes, then print a congratulatory message and update the progress.
-        % If not then ask the question again
-        if find(ismember(tasks{1}{3}, answer))
+        switch tasks{level}{4}
+            case 'string'
+                % Check if the input matches the possible answers registered. If
+                % yes, then print a congratulatory message and update the progress.
+                % If not then ask the question again
+                correct = find(ismember(tasks{1}{3}, answer));
+            case 'evaluation'
+                % Do several evaluations to check if the code is behaving
+                % the way it should. The evaluations should all give a 1 if
+                % they are successful or 0 if they are not. If a 0 is
+                % generated the evaluation sequence is stopping.
+                eval(answer)
+                correct = 1;
+                command = 1;
+                while (command<=length(tasks{level}{3}) && correct>0)
+                    try
+                        correct = eval(tasks{level}{3}{command})*correct;
+                    catch
+                        correct = 0;
+                        break
+                    end
+                    command = command+1;
+                end
+        end
+        
+        if correct
             fprintf('Bravo this is correct!\n\n')
             level = level+1;
             progress.(user) = level;
@@ -65,6 +87,6 @@ function tutorial
     
     % When all questions are completed, then contratulate the user and
     % direct her to the github repository.
-    fprintf(['Well done! You have completed all the questions!\n\nYou are now ready to dive deeper intp MATLAB and become a guru one day!\n\n',...
+    fprintf(['Well done! You have completed all the questions!\n\nYou are now ready to dive deeper into MATLAB and become a guru one day!\n\n',...
             'We hope you enjoyed. You can find updates on this tutorial on our github repository https://www.github.com/tassos/matlab_tutorial\n\n'])
 end
