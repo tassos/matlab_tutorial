@@ -59,11 +59,11 @@ function tutorial
                 % the way it should. The evaluations should all give a 1 if
                 % they are successful or 0 if they are not. If a 0 is
                 % generated the evaluation sequence is stopping.
-                eval(answer)
                 correct = 1;
                 command = 1;
                 while (command<=length(tasks{level}{3}) && correct>0)
                     try
+                        eval(answer)
                         correct = eval(tasks{level}{3}{command})*correct;
                     catch
                         correct = 0;
