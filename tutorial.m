@@ -78,7 +78,7 @@ function tutorial
                 % yes, then print a congratulatory message and update the progress.
                 % If not then ask the question again
                 correct = find(ismember(task.evaluation, answer));
-            case 'evaluation'
+            case 'commands'
                 % Do several evaluations to check if the code is behaving
                 % the way it should. The evaluations should all give a 1 if
                 % they are successful or 0 if they are not. If a 0 is
