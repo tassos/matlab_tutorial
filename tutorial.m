@@ -44,7 +44,7 @@ function tutorial
         if ~repeat
             fprintf('=====================================================\n\n')
             % Print the background information
-            fprintf([tasks{level}{1},'\n\n'])
+            fprintf([tasks{level}.background,'\n\n'])
             fprintf('=====================================================\n')
         end
         
@@ -61,12 +61,12 @@ function tutorial
             continue
         end
         
-        switch tasks{level}{4}
+        switch tasks{level}.type
             case 'string'
                 % Check if the input matches the possible answers registered. If
                 % yes, then print a congratulatory message and update the progress.
                 % If not then ask the question again
-                correct = find(ismember(tasks{1}{3}, answer));
+                correct = find(ismember(tasks{level}.evaluation, answer));
             case 'evaluation'
                 % Do several evaluations to check if the code is behaving
                 % the way it should. The evaluations should all give a 1 if
@@ -79,8 +79,8 @@ function tutorial
                 catch
                     correct = 0;
                 end
-                while (command<=length(tasks{level}{3}) && correct>0)
-                    correct = eval(tasks{level}{3}{command})*correct;
+                while (command<=length(tasks{level}.evaluation) && correct>0)
+                    correct = eval(tasks{level}.evaluation{command})*correct;
                     command = command+1;
                 end
         end
@@ -97,7 +97,7 @@ function tutorial
             repeat = 1;
         end
     end
-    
+
     % When all questions are completed, then contratulate the user and
     % direct her to the github repository.
     sound(handel.y,handel.Fs)
