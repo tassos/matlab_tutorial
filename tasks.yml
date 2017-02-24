@@ -13,7 +13,11 @@ Question2:
   preeval: []
   posteval: [clear('b')]
 Question3:
-  background: Testing if the YAML conversion works properly
+  background: |
+    In case the background is very lengthy,
+    this is how you define multiple lines in the field
+    (yeah, you just add a pipe '|' and then indent the following lines.
+    Each line will appear as a line in the tutorial as well.
   question: What do you think? Will it work?
   type: string
   evaluation: ['yes','yes!','definitely!!']
