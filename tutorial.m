@@ -62,9 +62,12 @@ function tutorial
                 % generated the evaluation sequence is stopping.
                 correct = 1;
                 command = 1;
+                try
+                    eval([answer,';']);
+                catch
+                end
                 while (command<=length(tasks{level}{3}) && correct>0)
                     try
-                        eval(answer)
                         correct = eval(tasks{level}{3}{command})*correct;
                     catch
                         correct = 0;
