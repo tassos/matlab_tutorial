@@ -61,6 +61,13 @@ function tutorial
             continue
         end
         
+        % Pre-evaluation events, in case some workspace preparation is
+        % needed
+        for command=tasks{level}.preeval
+            eval([command{:},';'])
+        end
+        
+        
         switch tasks{level}.type
             case 'string'
                 % Check if the input matches the possible answers registered. If
@@ -87,6 +94,10 @@ function tutorial
         
         if correct
             fprintf([congrats{randperm(numel(congrats),1)},'\n\nPress enter to continue\n\n']) %#ok<USENS> Loaded at the beginning of the function
+            % Post-evaluation events, in case some cleaning-up is required
+            for command=tasks{level}.posteval
+                eval([command{:},';'])
+            end
             level = level+1;
             progress.(user) = level;
             save('progress.mat','progress')
@@ -97,7 +108,7 @@ function tutorial
             repeat = 1;
         end
     end
-
+    
     % When all questions are completed, then contratulate the user and
     % direct her to the github repository.
     sound(handel.y,handel.Fs)
