@@ -16,6 +16,8 @@ function tutorial
     % Loading the matlab structure that contains the tasks for the tutorial
     load tasks.mat
     load messages.mat
+    gong = load('gong');
+    handel = load('handel');
     
     % Checking to see if a progress file exists. If not, then it will be
     % created later on
@@ -28,6 +30,7 @@ function tutorial
     % Getting the username, for storing progress of a student
     user = input('Please provide your username (no numbers please): ','s');
     users = fieldnames(progress);
+    sound(gong.y,gong.Fs)
     
     % Checking if the user exists. If not, then create her
     if ~ismember(user,users)
@@ -97,6 +100,7 @@ function tutorial
     
     % When all questions are completed, then contratulate the user and
     % direct her to the github repository.
-    fprintf(['Well done! You have completed all the questions!\n\nYou are now ready to dive deeper into MATLAB and become a guru one day!\n\n',...
+    sound(handel.y,handel.Fs)
+    fprintf(['\n\nWell done! You have completed all the questions!\nYou are now ready to dive deeper into MATLAB and become a guru one day!\n',...
             'We hope you enjoyed. You can find updates of this tutorial on our github repository https://www.github.com/tassos/matlab_tutorial\n\n'])
 end
