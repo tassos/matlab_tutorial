@@ -1,0 +1,21 @@
+Question1:
+  background: Variables are very useful in Matlab. They hold values that can be passed as arguments in functions
+  question: Define a variable "a" with the value "1"
+  type: string
+  evaluation: [a=1, a = 1, a =1, a= 1]
+  preeval: []
+  posteval: [clear('a')]
+Question2:
+  background: More about variables
+  question: Ready for a challenge? Define "b" equal to "1"!
+  type: evaluation
+  evaluation: ['exist(''b'',''var'')', b==1]
+  preeval: []
+  posteval: [clear('b')]
+Question3:
+  background: Testing if the YAML conversion works properly
+  question: What do you think? Will it work?
+  type: string
+  evaluation: ['yes','yes!','definitely!!']
+  preeval: []
+  posteval: [spy]
