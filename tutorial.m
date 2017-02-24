@@ -15,6 +15,7 @@ function tutorial
 
     % Loading the matlab structure that contains the tasks for the tutorial
     load tasks.mat
+    load messages.mat
     
     % Checking to see if a progress file exists. If not, then it will be
     % created later on
@@ -74,19 +75,23 @@ function tutorial
         end
         
         if correct
-            fprintf('Bravo this is correct!\n\n')
+            fprintf([congrats{randperm(numel(congrats),1)},'\n\nPress enter to continue\n\n']) %#ok<USENS> Loaded at the beginning of the function
             level = level+1;
             progress.(user) = level;
             save('progress.mat','progress')
             repeat = 0;
+            pause
         else
-            fprintf('This is not a general way of doing things, maybe try again?\n')
+            fprintf([retry{randperm(numel(retry),1)},'\n\n']) %#ok<USENS> Loaded at the beginning of the function
             repeat = 1;
         end
+        
+        % Post-question cleaning up. Just to make sure that there are no
+        % variables that could cause problems later on.
     end
     
     % When all questions are completed, then contratulate the user and
     % direct her to the github repository.
     fprintf(['Well done! You have completed all the questions!\n\nYou are now ready to dive deeper into MATLAB and become a guru one day!\n\n',...
-            'We hope you enjoyed. You can find updates on this tutorial on our github repository https://www.github.com/tassos/matlab_tutorial\n\n'])
+            'We hope you enjoyed. You can find updates of this tutorial on our github repository https://www.github.com/tassos/matlab_tutorial\n\n'])
 end
