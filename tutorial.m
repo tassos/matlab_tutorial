@@ -37,9 +37,11 @@ function tutorial
     % Loop over all the questions
     while level<=length(tasks) %#ok<USENS> This variable is loaded from the file above
         
+        fprintf('=====================================================\n\n')
         % Print the background information
-        sprintf([tasks{level}{1},'\n\n\n'])
+        fprintf([tasks{level}{1},'\n\n\n'])
         
+        fprintf('=====================================================\n\n')
         % Print the question and wait for input from the user
         answer = input(['Question ',num2str(level),'/',num2str(length(tasks)),':\n\n',tasks{level}{2},': '],'s');
         
@@ -47,17 +49,17 @@ function tutorial
         % yes, then print a congratulatory message and update the progress.
         % If not then ask the question again
         if find(ismember(tasks{1}{3}, answer))
-            sprintf('Bravo this is correct!\n\n')
+            fprintf('Bravo this is correct!\n\n')
             level = level+1;
             progress.(user) = level;
             save('progress.mat','progress')
         else
-            sprintf('This is not a general way of doing things, maybe try again?')
+            fprintf('This is not a general way of doing things, maybe try again?\n')
         end
     end
     
     % When all questions are completed, then contratulate the user and
     % direct her to the github repository.
-    sprintf(['Well done! You have completed all the questions!\n\nYou are now ready to dive deeper intp MATLAB and become a guru one day!\n\n',...
-            'We hope you enjoyed. You can find updates on this tutorial on our github repository https://www.github.com/tassos/matlab_tutorial'])
+    fprintf(['Well done! You have completed all the questions!\n\nYou are now ready to dive deeper intp MATLAB and become a guru one day!\n\n',...
+            'We hope you enjoyed. You can find updates on this tutorial on our github repository https://www.github.com/tassos/matlab_tutorial\n\n'])
 end
