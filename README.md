@@ -5,6 +5,7 @@ An interactive environment, working inside MATLAB, to teach basic concepts and s
 ## Prerequisites
 
 MATLAB 2015 (haven't tested it with older versions, but it should work)
+
 [YAMLMatlab library](https://github.com/beckel/nilm-eval/tree/master/Matlab/lib/YAMLMatlab_0.4.3)
 
 ## Project overview
@@ -65,7 +66,7 @@ An array of commands to be executed after the evaluation. This is useful in case
 
 ## Preparing the tasks database
 
-The tutorial is reading the tasks from the 'tasks.mat' structure. However, since it is difficult to create it manually, the structure can be generated from the corresponding tasks.yml file. To do that, simply execute the generate_tasks.m script. Make sure you install the prerequisites of the project!
+The tutorial is reading the tasks from the 'tasks.mat' structure. However, since it is difficult to create it manually, the structure can be generated from the corresponding tasks.yml file. To do that, simply execute the generate_tasks.m script. Make sure you install the [prerequisites](#prerequisites) of the project!
 
 ## Contact
 
