@@ -32,6 +32,9 @@ function tutorial
     users = fieldnames(progress);
     sound(gong.y,gong.Fs)
     
+    % Getting a list of questions
+    questions = fieldnames(tasks);
+    
     % Checking if the user exists. If not, then create her
     if ~ismember(user,users)
         progress.(user) = 1;
@@ -40,11 +43,12 @@ function tutorial
     repeat = 0;
 
     % Loop over all the questions
-    while level<=length(tasks) %#ok<USENS> This variable is loaded from the file above
+    while level<=length(questions)
+        task = tasks.(questions{level});
         if ~repeat
             fprintf('=====================================================\n\n')
             % Print the background information
-            fprintf([tasks{level}.background,'\n\n'])
+            fprintf([task.background,'\n\n'])
             fprintf('=====================================================\n')
         end
         
@@ -53,7 +57,7 @@ function tutorial
         fprintf('Type ''previous'' for going one question back\n\n')
 
         % Print the question and wait for input from the user
-        answer = input(['Question ',num2str(level),'/',num2str(length(tasks)),':\n\n',tasks{level}.question,': '],'s');
+        answer = input(['Question ',num2str(level),'/',num2str(length(questions)),':\n\n',task.question,': '],'s');
         
         % Going back a level, if the user wants to
         if strcmp(answer,'previous')
@@ -63,17 +67,17 @@ function tutorial
         
         % Pre-evaluation events, in case some workspace preparation is
         % needed
-        for command=tasks{level}.preeval
+        for command=task.preeval
             eval([command{:},';'])
         end
         
         
-        switch tasks{level}.type
+        switch task.type
             case 'string'
                 % Check if the input matches the possible answers registered. If
                 % yes, then print a congratulatory message and update the progress.
                 % If not then ask the question again
-                correct = find(ismember(tasks{level}.evaluation, answer));
+                correct = find(ismember(task.evaluation, answer));
             case 'evaluation'
                 % Do several evaluations to check if the code is behaving
                 % the way it should. The evaluations should all give a 1 if
@@ -86,8 +90,8 @@ function tutorial
                 catch
                     correct = 0;
                 end
-                while (command<=length(tasks{level}.evaluation) && correct>0)
-                    correct = eval(tasks{level}.evaluation{command})*correct;
+                while (command<=length(task.evaluation) && correct>0)
+                    correct = eval(task.evaluation{command})*correct;
                     command = command+1;
                 end
         end
@@ -95,7 +99,7 @@ function tutorial
         if correct
             fprintf([congrats{randperm(numel(congrats),1)},'\n\nPress enter to continue\n\n']) %#ok<USENS> Loaded at the beginning of the function
             % Post-evaluation events, in case some cleaning-up is required
-            for command=tasks{level}.posteval
+            for command=task.posteval
                 eval([command{:},';'])
             end
             level = level+1;
