@@ -46,14 +46,14 @@ function tutorial
             % Print the background information
             fprintf([tasks{level}{1},'\n\n'])
             fprintf('=====================================================\n')
-            
-            % Providing the option to go back one question and practise
-            % again
-            fprintf('Type ''previous'' for going one question back\n\n')
-            
-            % Print the question and wait for input from the user
-            answer = input(['Question ',num2str(level),'/',num2str(length(tasks)),':\n\n',tasks{level}{2},': '],'s');
         end
+        
+        % Providing the option to go back one question and practise
+        % again
+        fprintf('Type ''previous'' for going one question back\n\n')
+
+        % Print the question and wait for input from the user
+        answer = input(['Question ',num2str(level),'/',num2str(length(tasks)),':\n\n',tasks{level}.question,': '],'s');
         
         % Going back a level, if the user wants to
         if strcmp(answer,'previous')
