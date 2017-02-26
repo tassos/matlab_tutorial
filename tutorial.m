@@ -97,7 +97,8 @@ function tutorial
         end
         
         if correct
-            fprintf([congrats{randperm(numel(congrats),1)},'\n\nPress enter to continue\n\n']) %#ok<USENS> Loaded at the beginning of the function
+            cmessage = randperm(numel(congrats)); %#ok<USENS> Loaded at the beginning of the function
+            fprintf([congrats{cmessage(1)},'\n\nPress enter to continue\n\n'])
             % Post-evaluation events, in case some cleaning-up is required
             for command=task.posteval
                 eval([command{:},';'])
@@ -108,7 +109,8 @@ function tutorial
             repeat = 0;
             pause
         else
-            fprintf([retry{randperm(numel(retry),1)},'\n\n']) %#ok<USENS> Loaded at the beginning of the function
+            rmessage = randperm(numel(retry)); %#ok<USENS> Loaded at the beginning of the function
+            fprintf([retry{rmessage(1)},'\n\n'])
             repeat = 1;
         end
     end
