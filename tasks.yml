@@ -100,6 +100,6 @@ Question5:
         a = 13 29 45 61 77 93
     question: Write the command to calculate the difference between vectors c and b from the previous example and store it in variable 'a'
     type: commands
-    evaluation: ['exist(''a'',''var'')','prod(size(a)==[1,7])','a==[5 5 5 5 5 5 5]']
+    evaluation: ['exist(''a'',''var'')','size(a,1)==1','size(a,2)==7','a==[5 5 5 5 5 5 5]']
     preeval: ['b=4:8:52','c=b+5']
     posteval: ['clear(''b'')','clear(''c'')','clear(''a'')']
