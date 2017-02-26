@@ -86,7 +86,7 @@ function tutorial
                 correct = 1;
                 command = 1;
                 try
-                    eval([answer,';']);
+                    eval([answer])
                 catch
                     correct = 0;
                 end
