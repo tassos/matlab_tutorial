@@ -85,7 +85,7 @@ function tutorial
                 correct = 1;
                 command = 1;
                 try
-                    eval([answer])
+                    eval(answer)
                 catch
                     fprintf('Syntax error!!!\n\n')
                     correct = 0;
@@ -96,13 +96,14 @@ function tutorial
                 end
         end
         
+        % Post-evaluation events, in case some cleaning-up is required
+        for command=task.posteval
+            eval([command{:},';'])
+        end
+        
         if correct
             cmessage = randperm(numel(congrats)); %#ok<USENS> Loaded at the beginning of the function
             fprintf([congrats{cmessage(1)},'\n\nPress enter to continue\n\n'])
-            % Post-evaluation events, in case some cleaning-up is required
-            for command=task.posteval
-                eval([command{:},';'])
-            end
             level = level+1;
             progress.(user) = level;
             save('progress.mat','progress')
