@@ -106,8 +106,12 @@ Question5:
 Question6:
     background: |
       Testing functions
-    question: Define a function in the file name 'my_multip.m' that multiplies two numbers. Press enter when ready
+    question: |
+      Define a function 'my_multip' in a file with the same name. The function should take two
+      arguments (numbers) and it should return one output with the result of the
+      multiplication between the two numbers.
+      Press enter when ready
     type: commands
-    evaluation: ['strcmp(s.function,''my_multip'')','nargin(@my_multip)==2','my_multip(2,8)==16','my_multip(9,4)==36']
+    evaluation: ['strcmp(s.file,[pwd,''/my_multip.m''])','nargin(@my_multip)==2','my_multip(2,8)==16','my_multip(9,4)==36']
     preeval: ['clear my_multip','s=functions(@my_multip)']
     posteval: ['clear(''s'')']
