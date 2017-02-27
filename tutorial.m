@@ -41,7 +41,7 @@ function tutorial
     end
     level = progress.(user);
     repeat = 0;
-
+    
     % Loop over all the questions
     while level<=length(questions)
         task = tasks.(questions{level});
@@ -71,7 +71,6 @@ function tutorial
             eval([command{:},';'])
         end
         
-        
         switch task.type
             case 'string'
                 % Check if the input matches the possible answers registered. If
@@ -88,6 +87,7 @@ function tutorial
                 try
                     eval([answer])
                 catch
+                    fprintf('Syntax error!!!\n\n')
                     correct = 0;
                 end
                 while (command<=length(task.evaluation) && correct>0)
