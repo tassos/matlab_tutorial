@@ -113,5 +113,5 @@ Question6:
       Press enter when ready
     type: commands
     evaluation: ['strcmp(s.file,[pwd,''/my_multip.m''])','nargin(@my_multip)==2','my_multip(2,8)==16','my_multip(9,4)==36']
-    preeval: ['clear my_multip','s=functions(@my_multip)']
+    preeval: ['rehash','s=functions(@my_multip)']
     posteval: ['clear(''s'')']
