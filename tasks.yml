@@ -112,6 +112,6 @@ Question6:
       multiplication between the two numbers.
       Press enter when ready
     type: commands
-    evaluation: ['strcmp(s.file,[pwd,''/my_multip.m''])','nargin(@my_multip)==2','my_multip(2,8)==16','my_multip(9,4)==36']
+    evaluation: ['~isempty(s.file)','nargin(@my_multip)==2','my_multip(2,8)==16','my_multip(9,4)==36']
     preeval: ['rehash','s=functions(@my_multip)']
     posteval: ['clear(''s'')']
