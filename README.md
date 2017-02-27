@@ -6,7 +6,7 @@ An interactive environment, working inside MATLAB, to teach basic concepts and s
 
 MATLAB 2015 (haven't tested it with older versions, but it should work)
 
-[YAMLMatlab library](https://github.com/beckel/nilm-eval/tree/master/Matlab/lib/YAMLMatlab_0.4.3)
+[YAMLMatlab library](https://code.google.com/archive/p/yamlmatlab/)
 
 ## Project overview
 

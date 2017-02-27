@@ -7,7 +7,7 @@ function generate_tasks
 %   she probably aleady knows MATLAB and does not need this tutorial.
 %
 %   Prerequisites: YAMLMatlab library, that can be found here:
-%   https://github.com/beckel/nilm-eval/tree/master/Matlab/lib/YAMLMatlab_0.4.3
+%   https://code.google.com/archive/p/yamlmatlab/
 
 if ~exist('tasks.yml','file')
     tasks = ReadYaml(uiopen);
@@ -17,4 +17,3 @@ end
 
 save('tasks.mat','tasks');
 end
-
