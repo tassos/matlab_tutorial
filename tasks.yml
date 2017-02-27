@@ -138,8 +138,8 @@ Question7:
       xlabel('text'): Labels the x-axis with 'text'
       ylabel('text'): Labels the y-axis with 'text'
       subplot: Creates axes in tiled positions
-    question: Plot the line with function y=2*x+10 for x starting from 0 until 100
+    question: Plot the line with function y=2*x+10 for x starting from 0 until 100 (in one line)
     type: commands
     evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
-    preeval: ['x=0:100','y=2*x+10','h=axes','plot(h,x,y)','g=figure']
+    preeval: ['x=0:100','y=2*x+10','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','plot(k,x,y)','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])']
     posteval: ['close all']
