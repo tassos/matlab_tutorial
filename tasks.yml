@@ -103,3 +103,11 @@ Question5:
     evaluation: ['exist(''a'',''var'')','size(a,1)==1','size(a,2)==7','a==[5 5 5 5 5 5 5]']
     preeval: ['b=4:8:52','c=b+5']
     posteval: ['clear(''b'')','clear(''c'')','clear(''a'')']
+Question6:
+    background: |
+      Testing functions
+    question: Define a function in the file name 'my_multip.m' that multiplies two numbers. Press enter when ready
+    type: commands
+    evaluation: ['strcmp(s.function,''my_multip'')','nargin(@my_multip)==2','my_multip(2,8)==16','my_multip(9,4)==36']
+    preeval: ['clear my_multip','s=functions(@my_multip)']
+    posteval: ['clear(''s'')']
