@@ -54,15 +54,18 @@ function tutorial
         
         % Providing the option to go back one question and practise
         % again
-        fprintf('Type ''previous'' for going one question back\n\n')
+        fprintf('Type ''previous'' for going one question back, or exit to leave the tutorial\n\n')
 
         % Print the question and wait for input from the user
         answer = input(['Question ',num2str(level),'/',num2str(length(questions)),':\n\n',task.question,': '],'s');
         
         % Going back a level, if the user wants to
-        if strcmp(answer,'previous')
-            level = max(level-1,1);
-            continue
+        switch answer
+            case 'previous'
+                level = max(level-1,1);
+                continue
+            case 'exit'
+                return
         end
         
         % Pre-evaluation events, in case some workspace preparation is
