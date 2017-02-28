@@ -264,9 +264,50 @@ Question_plotting:
     preeval: ['x=0:100','y=2*x+10','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','plot(k,x,y)','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])']
     evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
     posteval: ['close all']
+Question_scripts:
+    background: |
+      When performing multiple operations in several variables, it is sometimes useful if we can
+      save the commands in order to execute them multiple times. This is simply done by creating
+      'scripts'. To create a script, click on 'New' and then 'Script'. You will see the editor appearing.
+      You can now type multiple commands that will be executed sequentiatlly. You will need to save the script
+      before executing it, by clicking on the 'Save' button.
+
+      To execute the script, type the name of the script in the command line and press enter.
+    question: |
+      Write a script with filename 'script.m' that performs the following operations
+      - Defines an matrix 'a' with elements [1 2 3 4;5 6 7 8]
+      - Defines a row vector 'b' as a sequence from 1 to 100 with increment 2
+      - Stores the element-wise squaring of matrix 'a' into a matrix 'c'
+
+      Press enter when the script is ready.
+    type: commands
+    preeval: ['clear(''a'',''b'',''c'')','rehash','if exist(''script.m'',''file''); script; end']
+    evaluation: ['exist(''a'',''var'')','exist(''b'',''var'')','exist(''c'',''var'')','isequal(a,[1 2 3 4;5 6 7 8])','isequal(b,1:2:100)','isequal(c,a.^2)']
+    posteval: ['clear(''a'',''b'',''c'')']
 Question_user_functions:
     background: |
+      Besides builtin functions, we can also create our own functions in MATLAB. This is similar to
+      creating scripts, but all the commands defined must be surrounded by a 'function' statement.
+      The use of functions allows us to avoid duplication of code by grouping operations that are
+      performed very frequently. Here's how a simple function for adding two numbers is defined
 
+        function [c,d] = addition_subtraction(a,b)
+          c = a+b;
+          d = a-b;
+        end
+
+      Each function can have multiple input and output arguments. The input arguments are defined on the right
+      side of the function name inside a braket and are separated by a comma. The output arguments are defined
+      on the left side of the function name inside square brackets and are separated by a comma.
+
+      We can save this function in a file to keep things cleaner. The name of the file must match the
+      name of the function.
+
+      Later on, we can call the function with any arguments we want and retrieve the results
+
+      >> addition_subtraction(4,2)
+      ans =
+        6  2
     question: |
       Define a function 'my_multip' in a file with the same name. The function should take two
       arguments (numbers) and it should return one output with the result of the
