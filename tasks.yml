@@ -1,4 +1,4 @@
-Question1:
+Question_statements:
   background: |
     Statements have the form:
     >> variable = expression
@@ -16,7 +16,7 @@ Question1:
   evaluation: ['exist(''a'',''var'')', 'a==56']
   preeval: [clear('a')]
   posteval: [clear('a')]
-Question2:
+Question_row_vector:
   background: |
     In MATLAB (and in mathematics in general) there is a difference between a row (line) and a column vector.
     It is very important to define the correct type of vector each time, because calculations can
@@ -33,7 +33,7 @@ Question2:
   evaluation: ['exist(''m'',''var'')', 'size(m)==[1,8]']
   preeval: [clear('m')]
   posteval: [clear('m')]
-Question3:
+Question_col_vector:
   background: |
     To define column vectores, the syntax is very similar. Instead of using spaces or commas, you
     need to use semicolons (;) to separate the elements.
@@ -55,7 +55,7 @@ Question3:
   evaluation: ['exist(''p'',''var'')', 'size(p)==[6,1]']
   preeval: [clear('p')]
   posteval: [clear('p')]
-Question4:
+Question_sequences:
     background: |
       Sometimes, we need several sequences of numbers for our MATLAB programs. When you need a very
       big sequence of numbers, it is unpractical to type all the numbers by hand. Luckily MATLAB has
@@ -81,7 +81,7 @@ Question4:
     evaluation: ['exist(''b'',''var'')','b==4:8:52']
     preeval: [clear('b')]
     posteval: [clear('b')]
-Question5:
+Question_sequences_2:
     background: |
       Creating vectors and sequences are not all that we want to do in MATLAB. We need to operate on them.
       You can do several things with vectors, such as add values to them. As in mathematics, if we add
@@ -105,7 +105,7 @@ Question5:
     evaluation: ['exist(''a'',''var'')','size(a,1)==1','size(a,2)==7','a==[5 5 5 5 5 5 5]']
     preeval: ['b=4:8:52','c=b+5']
     posteval: ['clear(''b'')','clear(''c'')','clear(''a'')']
-Question6:
+Question_builtin_functions:
     background: |
       To avoid having to write a lot of complicated operations with vectors and matrices,
       MATLAB has a lot of builtin standard functions and constants that can be used to simplify things.
@@ -130,12 +130,12 @@ Question6:
       to use a specific function, you can always use the 'help' command, followed by the name of the function
 
       >> help sin #Provides help on how to use the sin function
-    question: Store in variable 'h' the arctan of: the sine of 45 degrees divided by the cosine of 45 degrees.
+    question: Store in variable 'h' the arctan of the sine of 45 degrees divided by the cosine of 45 degrees.
     type: commands
-    evaluation: ['exist(''h'',''var'')'','h==pi/4']
+    evaluation: ['exist(''h'',''var'')','h==pi/4']
     preeval: ['clear h']
     posteval: ['clear h']
-Question7:
+Question_plotting:
     background: |
       Plotting is a very good way to inspect a function or some results by visualising them and observing any existing trends.
       The most simple way to plot data is using a 2 dimensional (2D) plot, which plots a vector (e.g. x) against another vector (e.g. y)
@@ -163,7 +163,7 @@ Question7:
     evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
     preeval: ['x=0:100','y=2*x+10','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','plot(k,x,y)','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])']
     posteval: ['close all']
-Question11:
+Question_user_functions:
     background: |
 
     question: |
