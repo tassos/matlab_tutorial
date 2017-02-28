@@ -46,15 +46,15 @@ function tutorial
     while level<=length(questions)
         task = tasks.(questions{level});
         if ~repeat
-            fprintf('=====================================================\n\n')
+            fprintf('Background:\n=====================================================\n\n')
             % Print the background information
-            fprintf([task.background,'\n\n'])
-            fprintf('=====================================================\n')
+            fprintf([task.background,'\n'])
+            fprintf('=====================================================\n\n')
         end
         
         % Providing the option to go back one question and practise
         % again
-        fprintf('Type ''previous'' for going one question back, or exit to leave the tutorial\n\n')
+        fprintf('Type ''previous'' for going one question back, ''background'' for reading the background again, or exit to leave the tutorial\n\n')
 
         % Print the question and wait for input from the user
         answer = input(['Question ',num2str(level),'/',num2str(length(questions)),':\n\n',task.question,': '],'s');
@@ -66,6 +66,9 @@ function tutorial
                 continue
             case 'exit'
                 return
+            case 'background'
+                repeat = 0;
+                continue
         end
         
         % Pre-evaluation events, in case some workspace preparation is
