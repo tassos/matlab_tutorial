@@ -236,34 +236,33 @@ Question_builtin_functions:
     preeval: ['clear h']
     evaluation: ['exist(''h'',''var'')','h==pi/4']
     posteval: ['clear h']
-Question_plotting:
+Question_polynomials:
     background: |
-      Plotting is a very good way to inspect a function or some results by visualising them and observing any existing trends.
-      The most simple way to plot data is using a 2 dimensional (2D) plot, which plots a vector (e.g. x) against another vector (e.g. y)
-      To do this, we simple use the 'plot' function and specifying the vectors that we want to use for plotting:
+      In MATLAB, a polynomial is represented by a vector. To create a polynomial in MATLAB, the coefficients
+      of the polynomial should be entered in descending order as elements of a vector. For instance, to enter
+      the following polynomial:
 
-      >> plot(x,y)
+        p(s) = s^4 + 3s^3 + 15s^2 - s2 + 9
 
-      The vectors x and y should have been previously defined and they should have the same size (i.e. dimensions and lengths)
+      you need to enter the vector in this manner:
 
-      A good example of visualisation is visualising the sine as a function of time. To do that, we first need to create a 't' vector representing the time
-      and then calculate the sine for the specific values of time.
+      >> p = [1 3 -15 -2 9]
 
-      >> t=0:0.25:7; y=sin(t); plot(t,y)
+      Remember that zero coefficients need to be entered as well (by placing a zero in the respective elements).
 
-      Basic plotting is very easy in Matlab, and the plot command has extensive add-on capabilities. These capabilities include many functions such as:
+      Then MATLAB has builtin functions to operate on polynomials defined like this
 
-      grid: Toggles a grid on and off the current figure
-      axis: Controls axis scaling and appearance
-      title('text'): Adds 'text' at the top of the current axis
-      xlabel('text'): Labels the x-axis with 'text'
-      ylabel('text'): Labels the y-axis with 'text'
-      subplot: Creates axes in tiled positions
-    question: Plot the line with function y=2*x+10 for x starting from 0 until 100 (in one line)
+      - roots(p)             Roots of polynomial p
+      - polyval(p,value)     Value of polynomial p at value
+      - conv(p,q)            Polynomial multiplication
+      - deconv(p,q)          Polynomial division
+    question: |
+      Define the following polynomial in variable 'p', and store the value at point 2 in variable 'v'
+        p(s) = s^8 + 5s^5 - 3s^2 + 10
     type: commands
-    preeval: ['x=0:100','y=2*x+10','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','plot(k,x,y)','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])']
-    evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
-    posteval: ['close all']
+    preeval: ['clear(''p'',''c'')']
+    evaluation: ['exist(''p'',''var'')','exist(''v'',''var'')','isequal(p,[1 0 0 5 0 0 -3 0 10])','isequal(v,polyval(p,2))']
+    posteval: ['clear(''p'',''c'')']
 Question_scripts:
     background: |
       When performing multiple operations in several variables, it is sometimes useful if we can
@@ -317,3 +316,77 @@ Question_user_functions:
     preeval: ['rehash','s=functions(@my_multip)']
     evaluation: ['~isempty(s.file)','nargin(@my_multip)==2','my_multip(2,8)==16','my_multip(9,4)==36']
     posteval: ['clear(''s'')']
+Question_plotting:
+    background: |
+      Plotting is a very good way to inspect a function or some results by visualising them and observing any existing trends.
+      The most simple way to plot data is using a 2 dimensional (2D) plot, which plots a vector (e.g. x) against another vector (e.g. y)
+      To do this, we simple use the 'plot' function and specifying the vectors that we want to use for plotting:
+
+      >> plot(x,y)
+
+      The vectors x and y should have been previously defined and they should have the same size (i.e. dimensions and lengths)
+
+      A good example of visualisation is visualising the sine as a function of time. To do that, we first need to create a 't' vector representing the time
+      and then calculate the sine for the specific values of time.
+
+      >> t=0:0.25:7; y=sin(t); plot(t,y)
+
+      Basic plotting is very easy in Matlab, and the plot command has extensive add-on capabilities. These capabilities include many functions such as:
+
+      grid: Toggles a grid on and off the current figure
+      axis: Controls axis scaling and appearance
+      title('text'): Adds 'text' at the top of the current axis
+      xlabel('text'): Labels the x-axis with 'text'
+      ylabel('text'): Labels the y-axis with 'text'
+      subplot: Creates axes in tiled positions
+    question: Plot the line with function y=2*x+10 for x starting from 0 until 100 (in one line)
+    type: commands
+    preeval: ['x=0:100','y=2*x+10','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','plot(k,x,y)','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])']
+    evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
+    posteval: ['close all']
+Question_mesh:
+    background: |
+      Plotting in 3D is even more fun and useful. Consider the function f(x,y) = x^2 + y^2
+      To graphically represent this function, first the values of x and y have to be defined using 'meshgrid'
+
+      >> [x,y] = meshgrid(-1:.01:1);
+
+      This command creates a grid of values for x and y, ranging from -1 to 1 with an increment of 0.01.
+      The range or increment can also be different for the two variables
+
+      >> [x,y] = meshgrid(-1:.01:1,-2:.01:2);
+
+      For plotting the graphical representation of the function at the points x,y we use the mesh command
+
+      >> mesh(x,y,x.^2+y.^2);
+
+      The value of the function is computed and plotted for each point on the grid. The z value and the colour
+      of the plot is related to the resulting value of the function for each point.
+
+    question: |
+      Create a script with filename 'mesh_script' that does the following
+      - Creates a mesh grid for x and y between -pi and pi with increment of 0.01
+      - Plot the 3D graphical representation of the function sine(x) + cosine(y) - sine(y)
+
+      Press enter when the script is ready
+    type: commands
+    preeval: ['[xi,yi]=meshgrid(-pi:0.01:pi)','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','mesh(k,xi,yi,sin(xi)+cos(yi)-sin(yi))','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])','rehash','if exist(''mesh_script.m'',''file''); mesh_script; end']
+    evaluation: ['exist(''x'',''var'')','exist(''y'',''var'')','isequal(x,xi)','isequal(y,yi)','strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
+    posteval: ['close all']
+Question_contour:
+    background: |
+      Sometimes, using a 2D representation of such functions can also be useful, specifically when plotting
+      the projection on the XY plane. To do this, we can use the 'contour' function the same way as the 'mesh' function
+
+      >> [x,y] = meshgrid(-1:.01:1,-2:.01:2);
+      >> countour(x,y,x.^2+y.^2);
+    question: |
+      Create a script with filename 'contour_script' that does the following
+      - Creates a mesh grid for x and y between -pi and pi with increment of 0.01
+      - Plot the 2D contour graphical representation of the function sine(x) + cosine(y) - sine(y)
+
+      Press enter when the script is ready
+    type: commands
+    preeval: ['[xi,yi]=meshgrid(-pi:0.01:pi)','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','contour(k,xi,yi,sin(xi)+cos(yi)-sin(yi))','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])','rehash','if exist(''contour_script.m'',''file''); contour_script; end']
+    evaluation: ['exist(''x'',''var'')','exist(''y'',''var'')','isequal(x,xi)','isequal(y,yi)','strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
+    posteval: ['close all']
