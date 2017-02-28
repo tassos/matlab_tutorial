@@ -1,6 +1,6 @@
 Question1:
   background: |
-    Satements have the form:
+    Statements have the form:
     >> variable = expression
     Equality "=" implies the assignment of the expression to the variable. The command prompt
     is represented by two right arrows ">>"
@@ -20,7 +20,9 @@ Question2:
   background: |
     In MATLAB (and in mathematics in general) there is a difference between a row (line) and a column vector.
     It is very important to define the correct type of vector each time, because calculations can
-    be wrong otherwise. To define a vector, we use the square brackets '[' (to denote the beginning of the vector) and ']' (to denote the end of the vector). The numbers we place between the brackets are the vector elements. For a row vector the element can be separated either by spaces or by commas.
+    be wrong otherwise. To define a vector, we use the square brackets '[' (to denote the beginning of the vector) and ']'
+    (to denote the end of the vector). The numbers we place between the brackets are the vector elements. For a row vector the
+    element can be separated either by spaces or by commas.
 
     >> t = [1 2 3 4 5 6 7 8];
     >> k = [1,2,3,4,5,6,7,8];
@@ -105,16 +107,34 @@ Question5:
     posteval: ['clear(''b'')','clear(''c'')','clear(''a'')']
 Question6:
     background: |
-      Testing functions
-    question: |
-      Define a function 'my_multip' in a file with the same name. The function should take two
-      arguments (numbers) and it should return one output with the result of the
-      multiplication between the two numbers.
-      Press enter when ready
+      To avoid having to write a lot of complicated operations with vectors and matrices,
+      MATLAB has a lot of builtin standard functions and constants that can be used to simplify things.
+      Almost all trigonometric functions are available as builtin functions, such as the function of
+      sine and cosine (sin(x) and cos(x) respectively). To use such a function, simply call the function
+      by its name and insert a number as an argument. For example, to save the cosine of 45 degrees
+      in a variable 'a' we can type this in the MATLAB command line:
+
+      >> a = cos(pi/4)
+
+      Notice that we need to provide the angle in radians. That is why we use the builtin constant 'pi'.
+      You can also notice that we can do operations inside the brakets (division in this case), or we could
+      even insert other functions as well.
+
+      >> b = sin(asin(pi/4))
+
+      In this case, we are calculating first the arcsine of pi/4 radians (45 degrees) and then we calculate
+      the sine of this result.
+
+      MATLAB has a very extensive library of builtin functions, which depends on which toolboxes are installed
+      on your system. To know which functions exist is a matter of experience. If you want to know how
+      to use a specific function, you can always use the 'help' command, followed by the name of the function
+
+      >> help sin #Provides help on how to use the sin function
+    question: Store in variable 'h' the arctan of: the sine of 45 degrees divided by the cosine of 45 degrees.
     type: commands
-    evaluation: ['~isempty(s.file)','nargin(@my_multip)==2','my_multip(2,8)==16','my_multip(9,4)==36']
-    preeval: ['rehash','s=functions(@my_multip)']
-    posteval: ['clear(''s'')']
+    evaluation: ['exist(''h'',''var'')'','h==pi/4']
+    preeval: ['clear h']
+    posteval: ['clear h']
 Question7:
     background: |
       Plotting is a very good way to inspect a function or some results by visualising them and observing any existing trends.
@@ -143,3 +163,15 @@ Question7:
     evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
     preeval: ['x=0:100','y=2*x+10','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','plot(k,x,y)','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])']
     posteval: ['close all']
+Question11:
+    background: |
+
+    question: |
+      Define a function 'my_multip' in a file with the same name. The function should take two
+      arguments (numbers) and it should return one output with the result of the
+      multiplication between the two numbers.
+      Press enter when the file is ready
+    type: commands
+    evaluation: ['~isempty(s.file)','nargin(@my_multip)==2','my_multip(2,8)==16','my_multip(9,4)==36']
+    preeval: ['rehash','s=functions(@my_multip)']
+    posteval: ['clear(''s'')']
