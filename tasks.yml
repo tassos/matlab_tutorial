@@ -390,3 +390,76 @@ Question_contour:
     preeval: ['[xi,yi]=meshgrid(-pi:0.01:pi)','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','contour(k,xi,yi,sin(xi)+cos(yi)-sin(yi))','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])','rehash','if exist(''contour_script.m'',''file''); contour_script; end']
     evaluation: ['exist(''x'',''var'')','exist(''y'',''var'')','isequal(x,xi)','isequal(y,yi)','strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
     posteval: ['close all']
+Question_symbolic:
+    background: |
+      The Symbolix Math toolbox allows one to work with symbolic variables. A symbolic variable 'x'
+      is defined as
+
+      >> syms x
+
+      Standard MATLAB operations and functions can be used on symbolic variables, and the returned result
+      will be symbolic as well (i.e. a generic variable that can be used without values). Symbolic variables
+      can be combined to create more complicated structures, such as symbolic functions
+
+      >> syms x y z
+      >> f = x+y;
+      >> g = 2*y+z;
+      >> h = f*g
+        h =
+          (x+y)*(2*y+z)
+
+      To evaluate a symbolic variable for a given set of values, you can use the 'subs' function (for one variable)
+
+      >> subs(f,x,1)
+      ans =
+          y+1;
+    question: Define a symbolic function f with symbolic variables x and y as f=x^2+3*y.
+    type: commands
+    preeval: ['clear(''f'',''x'',''y'')']
+    evaluation: ['isa(x,''sym'')','isa(y,''sym'')','isa(f,''sym'')','isequal(f,x^2+3*y)']
+    posteval: ['clear(''f'',''x'',''y'')']
+Question_sym_diff:
+    background: |
+      Symbolic functions can be differentiated or integrated, using diff or int respectively. In general
+      symbolic operations (such as diff or int) must be performed before any evaluation of variables.
+      We can differentiate with respect to a single variable like this
+
+      >> syms x y z;
+      >> h = (x+y)*(2*y+z);
+      >> diff(h,x)       #Differentiation with respect to x
+      ans =
+        2*y+z
+      >> diff(diff(h,x),y)       #Differentiation with respect to x and then to y
+      ans =
+        2
+
+      Or we can differentiate with respect to all the variables (i.e. Jacobian)
+      >> g = jacobian(h)
+      g =
+        [2*y+z, 4*y+z+2*x, x+y]
+
+      One can also solve symbolic equations
+
+      >> syms x
+      >> sol = solve('x^2+3*x=2')         # Second order polynomial equation
+      sol =
+        -3/2+1/2*17^(1/2)
+        -3/2-1/2*17^(1/2)
+
+      Or even systems of equations
+
+      >> syms x y
+      >> sol = solve('x^2+3*x=2','x+y=3')
+      sol.x =
+        -3/2+1/2*17^(1/2)
+        -3/2-1/2*17^(1/2)
+      sol.y =
+        9/2-1/2*17^(1/2)
+        9/2+1/2*17^(1/2)
+
+      The results are treated as symbolic variables and to obtain the exact value, they must be evaluated
+    question: Define a symbolic function f as f(x,y)=x^2+y^3+2xy and save in variable g the jacobian of f
+    type: commands
+    preeval: ['clear(''f'',''x'',''y'',''g'')','syms x y','fi = x^2+y^3+2*x*y']
+    evaluation: ['exist(''f'',''var'')','exist(''g'',''var'')','exist(''x'',''var'')','exist(''y'',''var'')','isequal(f,fi)','isequal(g,jacobian(f))']
+    posteval: ['clear(''f'',''x'',''y'',''g'')']
