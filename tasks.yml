@@ -13,8 +13,8 @@ Question_statements:
     >> a = 1; #Does not print any result. Now try it yourself.
   question: Define a variable "a" with the value "56"
   type: commands
-  evaluation: ['exist(''a'',''var'')', 'a==56']
   preeval: [clear('a')]
+  evaluation: ['exist(''a'',''var'')', 'a==56']
   posteval: [clear('a')]
 Question_row_vector:
   background: |
@@ -30,8 +30,8 @@ Question_row_vector:
     Row vectors t and k are identical. Let's try to make a row vector
   question: Define a row vector 'm' with 8 random elements
   type: commands
-  evaluation: ['exist(''m'',''var'')', 'size(m)==[1,8]']
   preeval: [clear('m')]
+  evaluation: ['exist(''m'',''var'')', 'size(m)==[1,8]']
   posteval: [clear('m')]
 Question_col_vector:
   background: |
@@ -52,8 +52,8 @@ Question_col_vector:
     Do you think you are ready to define your first column element?
   question: Define a column vector 'p' with exactly 6 elements
   type: commands
-  evaluation: ['exist(''p'',''var'')', 'size(p)==[6,1]']
   preeval: [clear('p')]
+  evaluation: ['exist(''p'',''var'')', 'size(p)==[6,1]']
   posteval: [clear('p')]
 Question_sequences:
     background: |
@@ -78,10 +78,10 @@ Question_sequences:
       Go ahead and try it!
     question: Define a row vector 'b' with numbers from 4 until 52 with an increment of 8
     type: commands
-    evaluation: ['exist(''b'',''var'')','b==4:8:52']
     preeval: [clear('b')]
+    evaluation: ['exist(''b'',''var'')','b==4:8:52']
     posteval: [clear('b')]
-Question_sequences_2:
+Question_operations:
     background: |
       Creating vectors and sequences are not all that we want to do in MATLAB. We need to operate on them.
       You can do several things with vectors, such as add values to them. As in mathematics, if we add
@@ -102,8 +102,8 @@ Question_sequences_2:
         a = 13 29 45 61 77 93
     question: Write the command to calculate the difference between vectors c and b from the previous example and store it in variable 'a'
     type: commands
-    evaluation: ['exist(''a'',''var'')','size(a,1)==1','size(a,2)==7','a==[5 5 5 5 5 5 5]']
     preeval: ['b=4:8:52','c=b+5']
+    evaluation: ['exist(''a'',''var'')','size(a,1)==1','size(a,2)==7','a==[5 5 5 5 5 5 5]']
     posteval: ['clear(''b'')','clear(''c'')','clear(''a'')']
 Question_builtin_functions:
     background: |
@@ -132,8 +132,8 @@ Question_builtin_functions:
       >> help sin #Provides help on how to use the sin function
     question: Store in variable 'h' the arctan of the sine of 45 degrees divided by the cosine of 45 degrees.
     type: commands
-    evaluation: ['exist(''h'',''var'')','h==pi/4']
     preeval: ['clear h']
+    evaluation: ['exist(''h'',''var'')','h==pi/4']
     posteval: ['clear h']
 Question_plotting:
     background: |
@@ -160,8 +160,8 @@ Question_plotting:
       subplot: Creates axes in tiled positions
     question: Plot the line with function y=2*x+10 for x starting from 0 until 100 (in one line)
     type: commands
-    evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
     preeval: ['x=0:100','y=2*x+10','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','plot(k,x,y)','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])']
+    evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
     posteval: ['close all']
 Question_user_functions:
     background: |
@@ -172,6 +172,6 @@ Question_user_functions:
       multiplication between the two numbers.
       Press enter when the file is ready
     type: commands
-    evaluation: ['~isempty(s.file)','nargin(@my_multip)==2','my_multip(2,8)==16','my_multip(9,4)==36']
     preeval: ['rehash','s=functions(@my_multip)']
+    evaluation: ['~isempty(s.file)','nargin(@my_multip)==2','my_multip(2,8)==16','my_multip(9,4)==36']
     posteval: ['clear(''s'')']
