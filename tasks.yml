@@ -102,9 +102,10 @@ Question_operations:
         a = 13 29 45 61 77 93
     question: Write the command to calculate the difference between vectors c and b from the previous example and store it in variable 'a'
     type: commands
-    preeval: ['b=4:8:52','c=b+5']
-    evaluation: ['exist(''a'',''var'')','size(a,1)==1','size(a,2)==7','a==[5 5 5 5 5 5 5]']
-    posteval: ['clear(''b'')','clear(''c'')','clear(''a'')']
+    preeval: ['b=4:8:52','c=b+5', 'clear(''a'')']
+    evaluation: ['exist(''a'',''var'')','isequal(a,[5 5 5 5 5 5 5])']
+    posteval: ['clear(''b'',''c'',''a'')']
+
 Question_builtin_functions:
     background: |
       To avoid having to write a lot of complicated operations with vectors and matrices,
