@@ -105,7 +105,107 @@ Question_operations:
     preeval: ['b=4:8:52','c=b+5', 'clear(''a'')']
     evaluation: ['exist(''a'',''var'')','isequal(a,[5 5 5 5 5 5 5])']
     posteval: ['clear(''b'',''c'',''a'')']
+Questions_line_commands:
+    background: |
+      Sometimes, it is useful to execute multiple commands writen on the same line. To
+      do that, write all the commands on the same line and separate them with a semicolon (;).
 
+      >> a = [1 2 3]; b [4 5 6]; c=b-a;
+
+      This series of commands execute one after the other, therefore variables defined at the
+      beginning of the line can be used for operations later on the same line
+    question: |
+      Create two row vectors (a and b) with elements '5 6 7' and '8 9 10' respectively and
+      save their sum into a vector 'c'. Do this in one line
+    type: commands
+    preeval: ['clear(''a'',''b'',''c'')']
+    evaluation: ['isequal(a,[5 6 7])','isequal(b,[8 9 10])','isequal(c,a+b)']
+    posteval: ['clear(''a'',''b'',''c'')']
+Question_powers:
+    background: |
+      MATLAB allows us to perform several operataions on numbers and matrices. Here's a list of possible operations
+      Considering a scalar (number) 's', a row vector 'r' and a column vector 'c', we can:
+
+      Add a scalar to a vector
+      >> qa = r+s
+      >> wa = c+s
+      Multiply a vector by a scalar
+      >> qm = r*s
+      >> wm = c*s
+      Raise a number to a power (e.g. square)
+      >> ss = s^2
+      Find the square root of a number
+      >> sr = sqrt(s)
+      Transpose a vector
+      >> ct = c' # from column to row
+      >> rt = r' # from row to column
+
+      You have to be careful, as all operation must be defined mathematicall (e.g. you cannot raise a row vector to a power)
+    question: Define a row vector 'a' with elements [1 2 3] and then add the value of 10 and multiply by 2
+    type: commands
+    preeval: ['clear(''a'')']
+    evaluation: ['exist(''a'',''var'')','isequal(a,[22 24 26])']
+    posteval: ['clear(''a'')']
+Question_dimensions:
+    background: |
+      Besides defining vectors in one dimension, it is possible to define matrices in multiple dimensions.
+      To do that, we use a combination of the notation for row and column vectors. To define a two dimensional
+      matrix 'b' we use the following syntax
+
+      >> b = [1 3 4 5;5 6 7 10];
+
+      This command will create a two dimensional matrix with 2 rows and four columns. You can inspect the size
+      of a matrix or vector using the 'size' command
+
+      >> size(b)
+      ans =
+        2   4
+      The first number corresponds to the length of the first dimension (rows) and the second to the second dimension (columns)
+
+      We can also retrieve specific elements of a matrix using 'indeces'. For a two dimensional matrix, we need
+      to specify which row and which column does the element reside. Using our previously defined matrix b, we can
+      request the element of the second row and third column like this:
+
+      >> b(2,3)
+
+      Remember that we first need to define the row and then the column
+    question: |
+      Define a two dimensional matrix 'b' with 4 rows and 3 columns with elements from 1 until 12 (filled by column).
+      Then save the element in 3rd row and 2nd column in a variable 'c'
+    type: command
+    preeval: ['clear(''b'',''c'')']
+    evaluation: ['exist(''b'',''var'')','exist(''c'',''var'')','isequal(b,[1 5 9;2 6 10;3 7 11;4 8 12])','isequal(c,7)']
+    posteval: ['clear(''b'',''c'')']
+Question_element_wise:
+    background: |
+      When working with matrices, sometimes we want to operate on the matrix as a whole, and sometimes we want to
+      operate on each of the elements of the matrix. A good example is the square operation of an matrix. By definition
+      squaring of an matrix means that we multiply it by itself. However, that is only possible for square matrices.
+
+      Consider a matrix H with MxM dimensions. To calcuate its square, we could raise the matrix to the power of two
+      >> H = [1 2 3; 4 5 6; 7 8 9];
+      >> HH = H^2 # This implies that we perform the following operation HH = H*H
+      HH =
+        30 36 42
+        66 81 96
+        102 126 150
+
+      If we however want to calculate the square of each element of the matrix (element-wise) operation, we need a slightly different syntax
+
+      >> HH = H.^2 # Pay attention to the dot. This will square each element of the matrix.
+      HH =
+        1  4  9
+        16 25 36
+        49 64 81
+
+      We can use the '.' notation for other operations besides raising to a power, such as division.
+    question: |
+      Define H as a 3x3 matrix such as the H in the example and a second 3x3 matrix M as the transpose of H
+      Calculate the element-wise division of H by M and save it in matrix D. (In one line)
+    type: commands
+    preeval: ['clear(''H'',''M'',''D'',''h'',''m'')','h=[1 2 3;4 5 6;7 8 9]','m=h''']
+    evaluation: ['exist(''H'',''var'')','exist(''M'',''var'')','isequal(D,h./m)']
+    posteval: ['clear(''H'',''M'')']
 Question_builtin_functions:
     background: |
       To avoid having to write a lot of complicated operations with vectors and matrices,
