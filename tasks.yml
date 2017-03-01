@@ -141,10 +141,10 @@ Question_powers:
       >> rt = r' # from row to column
 
       You have to be careful, as all operation must be defined mathematicall (e.g. you cannot raise a row vector to a power)
-    question: Define a row vector 'a' with elements [1 2 3] and then add the value of 10 and multiply by 2
+    question: Define a row vector 'a' with elements [1 2 3]. Then add the value 10 to 'a' and multiply the result by 2. Save the result in vector b.
     type: commands
     preeval: ['clear(''a'')']
-    evaluation: ['exist(''a'',''var'')','isequal(a,[22 24 26])']
+    evaluation: ['exist(''a'',''var'')','exist(''b'',''var'')','isequal(a,[1 2 3])','isequal(b,[22 24 26])']
     posteval: ['clear(''a'')']
 Question_dimensions:
     background: |
@@ -257,7 +257,7 @@ Question_polynomials:
       - conv(p,q)            Polynomial multiplication
       - deconv(p,q)          Polynomial division
     question: |
-      Define the following polynomial in variable 'p', and store the value at point 2 in variable 'v'
+      Define the following polynomial in variable 'p'. Find the value for the polynomial at p(2) and store the result in variable 'v'
         p(s) = s^8 + 5s^5 - 3s^2 + 10
     type: commands
     preeval: ['clear(''p'',''c'')']
@@ -379,7 +379,7 @@ Question_contour:
       the projection on the XY plane. To do this, we can use the 'contour' function the same way as the 'mesh' function
 
       >> [x,y] = meshgrid(-1:.01:1,-2:.01:2);
-      >> countour(x,y,x.^2+y.^2);
+      >> contour(x,y,x.^2+y.^2);
     question: |
       Create a script with filename 'contour_script' that does the following
       - Creates a mesh grid for x and y between -pi and pi with increment of 0.01
