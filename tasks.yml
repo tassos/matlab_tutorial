@@ -35,7 +35,7 @@ Question_row_vector:
   posteval: [clear('m')]
 Question_col_vector:
   background: |
-    To define column vectores, the syntax is very similar. Instead of using spaces or commas, you
+    To define column vectors, the syntax is very similar. Instead of using spaces or commas, you
     need to use semicolons (;) to separate the elements.
 
     >> c = [1;2;3;4;5;6;7;8];
@@ -242,7 +242,7 @@ Question_polynomials:
       of the polynomial should be entered in descending order as elements of a vector. For instance, to enter
       the following polynomial:
 
-        p(s) = s^4 + 3s^3 + 15s^2 - s2 + 9
+      p(s) = s^4 + 3s^3 + 15s^2 - s2 + 9
 
       you need to enter the vector in this manner:
 
@@ -315,6 +315,23 @@ Question_user_functions:
     type: commands
     preeval: ['rehash','s=functions(@my_multip)']
     evaluation: ['~isempty(s.file)','nargin(@my_multip)==2','my_multip(2,8)==16','my_multip(9,4)==36']
+    posteval: ['clear(''s'')']
+Question_constants:
+    background: |
+
+      Some constants in MATLAB have a less straighforward syntax. For instance if you want to use the e number,
+      you have to use the function exp(x), which will return the e^x.
+
+      You can use all of these already existing constants and functions inside of your own function.
+      Remember! If you are not sure about how a certain function works is it a good practice to use the help.
+
+    question: |
+      Create a function with name 'my_exp' which has two input arguments, for instance 'a' and 'b'. The function output is:
+      exponential('a' at the power of 'b') multiplied with pi.
+      Press enter when ready
+    type: commands
+    evaluation: ['~isempty(s.file)','nargin(@my_exp)==2','my_exp(2,4)==exp(2^4)*pi']
+    preeval: ['rehash','s=functions(@my_exp)']
     posteval: ['clear(''s'')']
 Question_plotting:
     background: |
@@ -390,6 +407,66 @@ Question_contour:
     preeval: ['[xi,yi]=meshgrid(-pi:0.01:pi)','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','contour(k,xi,yi,sin(xi)+cos(yi)-sin(yi))','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])','rehash','if exist(''contour_script.m'',''file''); contour_script; end']
     evaluation: ['exist(''x'',''var'')','exist(''y'',''var'')','isequal(x,xi)','isequal(y,yi)','strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
     posteval: ['close all']
+Question_structures:
+    background: |
+      After working a lot in matlab, you will realise that, it is not a good practice to create separate
+      variables for each parameter. A much better option is to use STRUCTURES, which are very easy to create here.
+
+      A structure is a collection of variables that don't have to be of the same type. Each variable is stored in separete
+      fields, and each field can be of any type.
+
+      For instance, you can have a ''fruit'' structure, and it can have fields such as ''name'', ''colour'' and ''weight''.
+      The name and colour fields should probably be strings, but the weight field would be better represented by a double.
+
+      To define a structure with fields, we use the dot syntax as following:
+
+      >> fruit.name = 'orange';
+      >> fruit.colour = 'orange';
+      >> fruit.weight = 1; # In kg
+
+      To access the content of a field, we use again the same syntax
+
+      >> fruit.name
+
+      ans =
+        orange
+
+      A field can be a structure by itself, with additional subfields
+
+      >> fruit.colour.skin = 'orange';
+      >> fruit.colour.leaves = 'green';
+
+      Finally, we can also create an array type struct and store multiple elements with the same fields
+
+      >> fruit(2).name = 'apple';
+      >> fruit(2).colour.skin = 'red';
+      >> fruit(2).colour.leaves = 'green';
+      >> fruit(2).weight = 0.5;
+      >> fruit(2)
+
+      ans =
+
+        name: 'apple'
+        colour: [1x1 struct]
+        weight: 1
+
+      >> fruit(2).colour
+      ans =
+
+        skin: 'red'
+        leaves: 'green'
+
+    question: |
+      Create a 'my_self' structure, which contains 4 fields:
+      name - your name (as a string)
+      sex - your sex (as a string)
+      age - your age (as a double)
+
+      Hint: you have to do everyting in one line :)
+    type: commands
+    evaluation: [ 'exist(''my_self'')','isfield(my_self,''name'')','isfield(my_self,''sex'')','isfield(my_self,''age'')','strcmp(class(my_self.name),''char'')','strcmp(class(my_self.sex),''char'')','strcmp(class(my_self.age),''double'')']
+    preeval: ['clear(''my_self'')']
+    posteval: ['clear(''my_self'')']
 Question_symbolic:
     background: |
       The Symbolix Math toolbox allows one to work with symbolic variables. A symbolic variable 'x'
@@ -463,3 +540,39 @@ Question_sym_diff:
     preeval: ['clear(''f'',''x'',''y'',''g'')','syms x y','fi = x^2+y^3+2*x*y']
     evaluation: ['exist(''f'',''var'')','exist(''g'',''var'')','exist(''x'',''var'')','exist(''y'',''var'')','isequal(f,fi)','isequal(g,jacobian(f))']
     posteval: ['clear(''f'',''x'',''y'',''g'')']
+Question_conditions:
+    background: |
+      At this point you should be already familiar with the variable declaration, in several ways.
+      As in other programming languages, in MATLAB we can also write loops and logical statements.
+      The 'if' statement has the following form:
+
+        if (condition)
+            statement, variable etc.
+        else
+            statement, variable etc.
+        end
+
+      'while':
+        while (condition)
+            statement, variable etc.
+        end
+
+      The 'for' loop is a little bit different from other programming languages
+        for  var= expression
+            statement, variable etc.
+        end
+
+      For example the expression can be i=1:10 or i=1:2:10 etc.
+    question: |
+      Create a function, with name 'my_stat' which has two input arguments, 'x', 'y'.
+      In the function you have to check if the input 'x' is a vector or a scalar.
+      If scalar:
+          iterate the following equation 10 times: sum = sum +(x^i)*y+ y/x; where sum=0, i=1; before the iteration;
+      If vector:
+          sort the vector 'x' in ascending order
+          insert the scalar 'y' into the vector 'x' at the right position so that the order remains good.
+          the output is a  sorted ROW
+    type: commands
+    evaluation: ['~isempty(s.file)','nargin(@my_stat)==2','my_stat(2,4)==8204', 'my_stat([1 3 2],4)== [1 2 3 4]' ]
+    preeval: ['rehash','s=functions(@my_stat)']
+    posteval: ['clear(''s'')']
