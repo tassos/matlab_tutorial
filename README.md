@@ -71,3 +71,7 @@ The tutorial is reading the tasks from the 'tasks.mat' structure. However, since
 ## Contact
 
 If you have questions or ideas, contact [Tassos Natsakis](https://www.natsakis.com).
+
+## Contributors
+
+Many thanks to Zoltan Nagy for contributing with questions and feedback!
