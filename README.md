@@ -74,4 +74,4 @@ If you have questions or ideas, contact [Tassos Natsakis](https://www.natsakis.c
 
 ## Contributors
 
-Many thanks to Zoltan Nagy for contributing with questions and feedback!
+Many thanks to [Zoltan Nagy](https://github.com/zoltan21) for contributing with questions and feedback!
