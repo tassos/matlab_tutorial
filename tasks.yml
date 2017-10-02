@@ -231,7 +231,7 @@ Question_builtin_functions:
       to use a specific function, you can always use the 'help' command, followed by the name of the function
 
       >> help sin #Provides help on how to use the sin function
-    question: Store in variable 'h' the arctan of the sine of 45 degrees divided by the cosine of 45 degrees.
+    question: Store in variable 'h' the arctan of the result of the sine of 45 degrees divided by the cosine of 45 degrees.
     type: commands
     preeval: ['clear h']
     evaluation: ['exist(''h'',''var'')','h==pi/4']
