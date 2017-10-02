@@ -143,9 +143,9 @@ Question_powers:
       You have to be careful, as all operation must be defined mathematicall (e.g. you cannot raise a row vector to a power)
     question: Define a row vector 'a' with elements [1 2 3]. Then add the value 10 to all elements of 'a' and multiply the result by 2, leaving 'a' untouched. Save the result in vector b.
     type: commands
-    preeval: ['clear(''a'')']
+    preeval: ['clear(''a'')','clear(''b'')']
     evaluation: ['exist(''a'',''var'')','exist(''b'',''var'')','isequal(a,[1 2 3])','isequal(b,[22 24 26])']
-    posteval: ['clear(''a'')']
+    posteval: ['clear(''a'')','clear(''b'')']
 Question_dimensions:
     background: |
       Besides defining vectors in one dimension, it is possible to define matrices in multiple dimensions.
