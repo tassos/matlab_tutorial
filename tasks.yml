@@ -100,7 +100,9 @@ Question_operations:
       >> a=b+c
       ans
         a = 13 29 45 61 77 93
-    question: Write the command to calculate the difference between vectors c and b from the previous example and store it in variable 'a'
+    question: |
+      Write the command to calculate the difference between vectors
+      c and b from the previous example and store it in variable 'a'
     type: commands
     preeval: ['b=4:8:52','c=b+5', 'clear(''a'')']
     evaluation: ['exist(''a'',''var'')','isequal(a,[5 5 5 5 5 5 5])']
@@ -115,8 +117,9 @@ Questions_line_commands:
       This series of commands execute one after the other, therefore variables defined at the
       beginning of the line can be used for operations later on the same line
     question: |
-      Create two row vectors (a and b) with elements '5 6 7' and '8 9 10' respectively and
-      save their sum into a vector 'c'. Do this in one line
+      Create two row vectors (a and b) with elements '5 6 7' and 
+      '8 9 10' respectively and save their sum into a vector 'c'. 
+      Do this in one line
     type: commands
     preeval: ['clear(''a'',''b'',''c'')']
     evaluation: ['isequal(a,[5 6 7])','isequal(b,[8 9 10])','isequal(c,a+b)']
@@ -141,10 +144,43 @@ Question_powers:
       >> rt = r' # from row to column
 
       You have to be careful, as all operation must be defined mathematicall (e.g. you cannot raise a row vector to a power)
-    question: Define a row vector 'a' with elements [1 2 3]. Then add the value 10 to all elements of 'a' and multiply the result by 2, leaving 'a' untouched. Save the result in vector b.
+    question: |
+      Define a row vector 'a' with elements [1 2 3]. 
+      Define another vector b, which has the following form:
+      'a' plus 10, and everything is multiplied by 2.
     type: commands
     preeval: ['clear(''a'')','clear(''b'')']
     evaluation: ['exist(''a'',''var'')','exist(''b'',''var'')','isequal(a,[1 2 3])','isequal(b,[22 24 26])']
+    posteval: ['clear(''a'')','clear(''b'')']
+Question_vector_manipulation:
+    background: |
+      Beside the previously mentioned operations, it is possible to perform several vector manipulations,
+      without doing any unnecesary looping. Matlab is optimized for these kind of operations,
+      and will perform much faster than with several iterations. 
+      Fo instance you have the vector :
+      >> a = [23 42 45 7 9 4 43];
+      You can select the 2nd, 5th and 6th elements in the following way:
+      >> a([2 5 6])
+      ans =
+      42     9     4
+
+      Also if you want to access the last element from a vector you can use the keyword: "end"
+      For example:
+      >> a(end)
+      ans =
+      43
+
+      In order to define the selection of several elements a vector can be used:
+      to every third element from a vector you can use:
+      >> a(1:3:end)
+      ans =
+      23     7    43
+    question: |
+      Define a row vector 'a' with elements from 1 to 77, with increment 2.
+      Select every 5th element, starting from the first one, and save them in vector 'b' 
+    type: commands
+    preeval: ['clear(''a'')','clear(''b'')']
+    evaluation: ['exist(''a'',''var'')','exist(''b'',''var'')','isequal(a,[1:2:77])','isequal(b,a([1:5:end]))']
     posteval: ['clear(''a'')','clear(''b'')']
 Question_dimensions:
     background: |
@@ -170,9 +206,10 @@ Question_dimensions:
 
       Remember that we first need to define the row and then the column
     question: |
-      Define a two dimensional matrix 'b' with 4 rows and 3 columns with elements from 1 until 12 (filled by column).
+      Define a two dimensional matrix 'b' with 4 rows and 3 columns
+      with elements from 1 until 12, filled by column!
       Then save the element in 3rd row and 2nd column in a variable 'c'
-    type: command
+    type: commands
     preeval: ['clear(''b'',''c'')']
     evaluation: ['exist(''b'',''var'')','exist(''c'',''var'')','isequal(b,[1 5 9;2 6 10;3 7 11;4 8 12])','isequal(c,7)']
     posteval: ['clear(''b'',''c'')']
@@ -200,8 +237,10 @@ Question_element_wise:
 
       We can use the '.' notation for other operations besides raising to a power, such as division.
     question: |
-      Define H as a 3x3 matrix such as the H in the example and a second 3x3 matrix M as the transpose of H
-      Calculate the element-wise division of H by M and save it in matrix D. (In one line)
+      Define H as a 3x3 matrix such as the H in the example
+      and a second 3x3 matrix M as the transpose of H
+      Calculate the element-wise division of H by M and save it in matrix D. 
+      (In one line)
     type: commands
     preeval: ['clear(''H'',''M'',''D'',''h'',''m'')','h=[1 2 3;4 5 6;7 8 9]','m=h''']
     evaluation: ['exist(''H'',''var'')','exist(''M'',''var'')','isequal(D,h./m)']
@@ -231,7 +270,9 @@ Question_builtin_functions:
       to use a specific function, you can always use the 'help' command, followed by the name of the function
 
       >> help sin #Provides help on how to use the sin function
-    question: Store in variable 'h' the arctan of the result of the sine of 45 degrees divided by the cosine of 45 degrees.
+    question: |
+      Store in variable 'h' the arctan of the result of the sine of 45 degrees
+      divided by the cosine of 45 degrees.
     type: commands
     preeval: ['clear h']
     evaluation: ['exist(''h'',''var'')','h==pi/4']
@@ -257,7 +298,8 @@ Question_polynomials:
       - conv(p,q)            Polynomial multiplication
       - deconv(p,q)          Polynomial division
     question: |
-      Define the following polynomial in variable 'p'. Find the value for the polynomial at p(2) and store the result in variable 'v'
+      Define the following polynomial in variable 'p'. 
+      Find the value for the polynomial at p(2) and store the result in variable 'v'
         p(s) = s^8 + 5s^5 - 3s^2 + 10
     type: commands
     preeval: ['clear(''p'',''c'')']
@@ -326,8 +368,8 @@ Question_constants:
       Remember! If you are not sure about how a certain function works is it a good practice to use the help.
 
     question: |
-      Create a function with name 'my_exp' which has two input arguments, for instance 'a' and 'b'. The function output is:
-      exponential('a' at the power of 'b') multiplied with pi.
+      Create a function with name 'my_exp' which has two input arguments, for instance 'a' and 'b'.
+      The function output is: exponential('a' at the power of 'b') multiplied with pi.
       Press enter when ready
     type: commands
     evaluation: ['~isempty(s.file)','nargin(@my_exp)==2','my_exp(2,4)==exp(2^4)*pi']
@@ -356,7 +398,8 @@ Question_plotting:
       xlabel('text'): Labels the x-axis with 'text'
       ylabel('text'): Labels the y-axis with 'text'
       subplot: Creates axes in tiled positions
-    question: Plot the line with function y=2*x+10 for x starting from 0 until 100 (in one line)
+    question: |
+      Plot the line with function y=2*x+10 for x starting from 0 until 100 (in one line)
     type: commands
     preeval: ['x=0:100','y=2*x+10','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','plot(k,x,y)','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])']
     evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
@@ -535,7 +578,9 @@ Question_sym_diff:
         9/2+1/2*17^(1/2)
 
       The results are treated as symbolic variables and to obtain the exact value, they must be evaluated
-    question: Define a symbolic function f as f(x,y)=x^2+y^3+2xy and save in variable g the jacobian of f
+    question: |
+      Define a symbolic expression f as f=x^2+y^3+2xy 
+      and save in variable g the jacobian of f
     type: commands
     preeval: ['clear(''f'',''x'',''y'',''g'')','syms x y','fi = x^2+y^3+2*x*y']
     evaluation: ['exist(''f'',''var'')','exist(''g'',''var'')','exist(''x'',''var'')','exist(''y'',''var'')','isequal(f,fi)','isequal(g,jacobian(f))']
