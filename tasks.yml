@@ -242,7 +242,7 @@ Question_polynomials:
       of the polynomial should be entered in descending order as elements of a vector. For instance, to enter
       the following polynomial:
 
-      p(s) = s^4 + 3s^3 + 15s^2 - s2 + 9
+      p(s) = s^4 + 3*s^3 + 15*s^2 - 2*s + 9
 
       you need to enter the vector in this manner:
 
