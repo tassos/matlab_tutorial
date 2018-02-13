@@ -74,7 +74,11 @@ function tutorial
         % Pre-evaluation events, in case some workspace preparation is
         % needed
         for command=task.preeval
-            eval([command{:},';'])
+            try
+                eval([command{:},';'])
+            catch
+                fprintf('Syntax error!!!\n\n')
+            end
         end
         
         switch task.type
@@ -97,17 +101,27 @@ function tutorial
                     correct = 0;
                 end
                 while (command<=length(task.evaluation) && correct>0)
-                    correct = eval(task.evaluation{command})*correct;
-                    command = command+1;
+                    try
+                        correct = eval(task.evaluation{command})*correct;
+                        command = command+1;
+                    catch
+                        fprintf('Syntax error!!!\n\n')
+                        correct = 0;
+                        break
+                    end
                 end
         end
         
         % Post-evaluation events, in case some cleaning-up is required
         for command=task.posteval
-            eval([command{:},';'])
+            try
+                eval([command{:},';'])
+            catch
+                fprintf('Syntax error!!!\n\n')
+            end
         end
         
-        if correct
+        if all(correct)
             cmessage = randperm(numel(congrats)); %#ok<USENS> Loaded at the beginning of the function
             fprintf([congrats{cmessage(1)},'\n\nPress enter to continue\n\n'])
             level = level+1;
