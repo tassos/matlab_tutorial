@@ -425,13 +425,13 @@ Question_mesh:
 
     question: |
       Create a script with filename 'mesh_script' that does the following
-      - Creates a mesh grid for x and y between -pi and pi with increment of 0.01
+      - Creates a mesh grid for x and y between -pi and pi with increment of 0.01.
       - Plot the 3D graphical representation of the function sine(x) + cosine(y) - sine(y)
 
       Press enter when the script is ready
     type: commands
     preeval: ['[xi,yi]=meshgrid(-pi:0.01:pi)','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','mesh(k,xi,yi,sin(xi)+cos(yi)-sin(yi))','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])','rehash','if exist(''mesh_script.m'',''file''); mesh_script; end']
-    evaluation: ['exist(''x'',''var'')','exist(''y'',''var'')','isequal(x,xi)','isequal(y,yi)','strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
+    evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
     posteval: ['close all']
 Question_contour:
     background: |
@@ -448,7 +448,7 @@ Question_contour:
       Press enter when the script is ready
     type: commands
     preeval: ['[xi,yi]=meshgrid(-pi:0.01:pi)','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','contour(k,xi,yi,sin(xi)+cos(yi)-sin(yi))','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])','rehash','if exist(''contour_script.m'',''file''); contour_script; end']
-    evaluation: ['exist(''x'',''var'')','exist(''y'',''var'')','isequal(x,xi)','isequal(y,yi)','strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
+    evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
     posteval: ['close all']
 Question_structures:
     background: |
