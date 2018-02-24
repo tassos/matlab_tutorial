@@ -238,13 +238,13 @@ Question_element_wise:
       We can use the '.' notation for other operations besides raising to a power, such as division.
     question: |
       Define H as a 3x3 matrix such as the H in the example
-      and a second 3x3 matrix M as the transpose of H
+      and a second 3x3 matrix M as the transpose of H.
       Calculate the element-wise division of H by M and save it in matrix D. 
       (In one line)
     type: commands
-    preeval: ['clear(''H'',''M'',''D'',''h'',''m'')','h=[1 2 3;4 5 6;7 8 9]','m=h''']
-    evaluation: ['exist(''H'',''var'')','exist(''M'',''var'')','isequal(D,h./m)']
-    posteval: ['clear(''H'',''M'')']
+    preeval: ['clear(''H'',''M'',''D'',''h'',''m'')','h=[1 2 3;4 5 6;7 8 9]','m=h']
+    evaluation: ['exist(''H'',''var'')','exist(''M'',''var'')','isequal(D,h./m)||isequal(D,H./M)']
+    posteval: ['clear(''H'',''M'',''h'',''m'')']
 Question_builtin_functions:
     background: |
       To avoid having to write a lot of complicated operations with vectors and matrices,
@@ -271,8 +271,8 @@ Question_builtin_functions:
 
       >> help sin #Provides help on how to use the sin function
     question: |
-      Store in variable 'h' the arctan of the result of the sine of 45 degrees
-      divided by the cosine of 45 degrees.
+      Calculate the result of the sine of 45 degrees divided by the cosine of 45 degrees.
+      Then calculate the arctan of the result and store it in variable 'h'.
     type: commands
     preeval: ['clear h']
     evaluation: ['exist(''h'',''var'')','h==pi/4']
@@ -536,7 +536,7 @@ Question_symbolic:
     question: Define a symbolic function f with symbolic variables x and y as f=x^2+3*y.
     type: commands
     preeval: ['clear(''f'',''x'',''y'')']
-    evaluation: ['isa(x,''sym'')','isa(y,''sym'')','isa(f,''sym'')','isequal(f,x^2+3*y)']
+    evaluation: ['isa(x,''sym'')','isa(y,''sym'')','isa(f,''sym'')','isequal(f,x^2+3*y)||isequal(f(x,y),x^2+3*y)']
     posteval: ['clear(''f'',''x'',''y'')']
 Question_sym_diff:
     background: |
