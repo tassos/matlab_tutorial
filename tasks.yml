@@ -11,7 +11,7 @@ Question_statements:
     execution of your program. To suppress the output of any assignment or result, use the semicolon (;)
     in a statement
     >> a = 1; #Does not print any result. Now try it yourself.
-  question: Define a variable "a" with the value "56"
+  question: Define a variable 'a' with the value '56'
   type: commands
   preeval: [clear('a')]
   evaluation: ['exist(''a'',''var'')', 'a==56']
@@ -70,9 +70,9 @@ Question_sequences:
       By default, the sequence is created by incrementing by 1, but different increments can be chosen.
       Simply sandwich the increment that you want between the first and last value, and separate by a colon.
 
-      >> 1:5:20
+      >> 0:5:20
       ans =
-        1 5 10 15 20
+        0 5 10 15 20
 
       You can also use a decimal or a negative number as an increment!
       Go ahead and try it!
@@ -102,7 +102,7 @@ Question_operations:
         a = 13 29 45 61 77 93
     question: |
       Write the command to calculate the difference between vectors
-      c and b from the previous example and store it in variable 'a'
+      'c' and 'b' from the previous example and store it in variable 'a'
     type: commands
     preeval: ['b=4:8:52','c=b+5', 'clear(''a'')']
     evaluation: ['exist(''a'',''var'')','isequal(a,[5 5 5 5 5 5 5])']
@@ -117,7 +117,7 @@ Questions_line_commands:
       This series of commands execute one after the other, therefore variables defined at the
       beginning of the line can be used for operations later on the same line
     question: |
-      Create two row vectors (a and b) with elements '5 6 7' and 
+      Create two row vectors ('a' and 'b') with elements '5 6 7' and 
       '8 9 10' respectively and save their sum into a vector 'c'. 
       Do this in one line
     type: commands
@@ -146,7 +146,7 @@ Question_powers:
       You have to be careful, as all operation must be defined mathematicall (e.g. you cannot raise a row vector to a power)
     question: |
       Define a row vector 'a' with elements [1 2 3]. 
-      Define another vector b, which has the following form:
+      Define another vector 'b', which has the following form:
       'a' plus 10, and everything is multiplied by 2.
     type: commands
     preeval: ['clear(''a'')','clear(''b'')']
@@ -177,7 +177,8 @@ Question_vector_manipulation:
       23     7    43
     question: |
       Define a row vector 'a' with elements from 1 to 77, with increment 2.
-      Select every 5th element, starting from the first one, and save them in vector 'b' 
+      Select every 5th element from vector 'a', starting from the first one, 
+      and save them in vector 'b'. (Hint: Read background!)
     type: commands
     preeval: ['clear(''a'')','clear(''b'')']
     evaluation: ['exist(''a'',''var'')','exist(''b'',''var'')','isequal(a,[1:2:77])','isequal(b,a([1:5:end]))']
@@ -207,7 +208,7 @@ Question_dimensions:
       Remember that we first need to define the row and then the column
     question: |
       Define a two dimensional matrix 'b' with 4 rows and 3 columns
-      with elements from 1 until 12, filled by column!
+      with elements from 1 until 12, filled by column!!!
       Then save the element in 3rd row and 2nd column in a variable 'c'
     type: commands
     preeval: ['clear(''b'',''c'')']
@@ -272,7 +273,8 @@ Question_builtin_functions:
       >> help sin #Provides help on how to use the sin function
     question: |
       Calculate the result of the sine of 45 degrees divided by the cosine of 45 degrees.
-      Then calculate the arctan of the result and store it in variable 'h'.
+      Then calculate the arctan of the result and store it in variable 'h'. 
+      (Hint: Use pi/4 for 45 degrees)
     type: commands
     preeval: ['clear h']
     evaluation: ['exist(''h'',''var'')','h==pi/4']
@@ -369,7 +371,8 @@ Question_constants:
 
     question: |
       Create a function with name 'my_exp' which has two input arguments, for instance 'a' and 'b'.
-      The function output is: exponential('a' at the power of 'b') multiplied with pi.
+      The function output is: 'e' at the power of ('a' at the power of 'b') multiplied with pi.
+      Where 'e' is the Euler's number.
       Press enter when ready
     type: commands
     evaluation: ['~isempty(s.file)','nargin(@my_exp)==2','my_exp(2,4)==exp(2^4)*pi']
@@ -613,9 +616,10 @@ Question_conditions:
       In the function you have to check if the input 'x' is a vector or a scalar.
       If scalar:
           iterate the following equation 10 times: a = a +(x^i)*y+ y/x; where a=0, i=1; before the iteration;
+          The output is 'a'
       If vector:
+          insert the scalar 'y' into the vector 'x'
           sort the vector 'x' in ascending order
-          insert the scalar 'y' into the vector 'x' at the right position so that the order remains good.
           the output is a sorted ROW
     type: commands
     evaluation: ['~isempty(s.file)','nargin(@my_stat)==2','my_stat(2,4)==8204', 'my_stat([1 3 2],4)== [1 2 3 4]' ]
