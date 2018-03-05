@@ -76,8 +76,13 @@ function tutorial
         for command=task.preeval
             try
                 eval([command{:},';'])
-            catch
-                fprintf('Syntax error!!!\n\n')
+            catch e
+                fprintf(2,'MATLAB error message:\n%s \n',e.message);
+                fname=e.stack.name; 
+                if ~(strcmp(fname,'tutorial')==1)
+                    l=e.stack.line;
+                    fprintf(2,'Error in %s.m file, at line %d\n',fname, l);
+                end
             end
         end
         
@@ -96,16 +101,26 @@ function tutorial
                 command = 1;
                 try
                     eval(answer)
-                catch
-                    fprintf('Syntax error!!!\n\n')
+                catch e
+                    fprintf(2,'MATLAB error message:\n%s \n',e.message);
+                    fname=e.stack.name;
+                    if ~(strcmp(fname,'tutorial')==1)
+                        l=e.stack.line;
+                        fprintf(2,'Error in %s.m file, at line %d\n',fname, l);
+                    end
                     correct = 0;
                 end
                 while (command<=length(task.evaluation) && correct>0)
                     try
                         correct = eval(task.evaluation{command})*correct;
                         command = command+1;
-                    catch
-                        fprintf('Syntax error!!!\n\n')
+                    catch e
+                        fprintf(2,'MATLAB error message:\n%s \n',e.message);
+                        fname=e.stack.name; 
+                        if ~(strcmp(fname,'tutorial')==1)
+                            l=e.stack.line;
+                            fprintf(2,'Error in %s.m file, at line %d\n',fname, l);
+                        end
                         correct = 0;
                         break
                     end
@@ -116,8 +131,13 @@ function tutorial
         for command=task.posteval
             try
                 eval([command{:},';'])
-            catch
-                fprintf('Syntax error!!!\n\n')
+            catch e
+                fprintf(2,'MATLAB error message:\n%s \n',e.message);
+                fname=e.stack.name; 
+                if ~(strcmp(fname,'tutorial')==1)
+                    l=e.stack.line;
+                    fprintf(2,'Error in %s.m file, at line %d\n',fname, l);
+                end  
             end
         end
         
@@ -136,7 +156,7 @@ function tutorial
         end
     end
     
-    % When all questions are completed, then contratulate the user and
+    % When all questions are completed, then congratulate the user and
     % direct her to the github repository.
     sound(handel.y,handel.Fs)
     fprintf(['\n\nWell done! You have completed all the questions!\nYou are now ready to dive deeper into MATLAB and become a guru one day!\n',...
