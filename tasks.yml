@@ -209,7 +209,7 @@ Question_dimensions:
     question: |
       Define a two dimensional matrix 'b' with 4 rows and 3 columns
       with elements from 1 until 12, filled by column!!!
-      Then save the element in 3rd row and 2nd column in a variable 'c'
+      Then save the element in 3rd row and 2nd column of 'b' in a variable 'c'
     type: commands
     preeval: ['clear(''b'',''c'')']
     evaluation: ['exist(''b'',''var'')','exist(''c'',''var'')','isequal(b,[1 5 9;2 6 10;3 7 11;4 8 12])','isequal(c,7)']
@@ -285,7 +285,7 @@ Question_polynomials:
       of the polynomial should be entered in descending order as elements of a vector. For instance, to enter
       the following polynomial:
 
-      p(s) = s^4 + 3*s^3 + 15*s^2 - 2*s + 9
+      p(s) = s^4 + 3*s^3 - 15*s^2 - 2*s + 9
 
       you need to enter the vector in this manner:
 
