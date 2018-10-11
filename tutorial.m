@@ -29,6 +29,16 @@ function tutorial
     
     % Getting the username, for storing progress of a student
     user = input('Please provide your username (no numbers please): ','s');
+    
+    courses = {'Robotics','Optimisation','System identification'};
+    figure('Position',[300 300 200 100],'Name','Selection','MenuBar','none');
+    parentpanel = uipanel('Units','pixels','Title','Choose your course','Position',[5 5 190 90]);
+    lbs = uicontrol ('Parent',parentpanel,'Style','popupmenu','String',courses,'Units','Pixels','Position',[4 5 180 60]);
+    uicontrol('Style','pushbutton','String','Done','Position',[50 10 100 30],'Callback',@hDoneCallback);
+    uiwait
+    course = courses(get(lbs,'Value'));
+    close
+    
     users = fieldnames(progress);
     sound(gong.y,gong.Fs)
     
@@ -45,114 +55,119 @@ function tutorial
     % Loop over all the questions
     while level<=length(questions)
         task = tasks.(questions{level});
-        if ~repeat
-            fprintf('Background:\n=====================================================\n\n')
-            % Print the background information
-            fprintf([task.background,'\n'])
-            fprintf('=====================================================\n\n')
-        end
-        
-        % Providing the option to go back one question and practise
-        % again
-        fprintf('Type ''previous'' for going one question back, ''background'' for reading the background again, or exit to leave the tutorial\n\n')
-
-        % Print the question and wait for input from the user
-        answer = input(['Question ',num2str(level),'/',num2str(length(questions)),':\n\n',task.question,': '],'s');
-        
-        % Going back a level, if the user wants to
-        switch answer
-            case 'previous'
-                level = max(level-1,1);
-                continue
-            case 'exit'
-                return
-            case 'background'
-                repeat = 0;
-                continue
-        end
-        
-        % Pre-evaluation events, in case some workspace preparation is
-        % needed
-        for command=task.preeval
-            try
-                eval([command{:},';'])
-            catch e
-                fprintf(2,'MATLAB error message:\n%s \n',e.message);
-                fname=e.stack.name; 
-                if ~(strcmp(fname,'tutorial')==1)
-                    l=e.stack.line;
-                    fprintf(2,'Error in %s.m file, at line %d\n',fname, l);
-                end
+        if ismember(lower(course),task.courses) || ismember('all',task.courses)
+            if ~repeat
+                fprintf('Background:\n=====================================================\n\n')
+                % Print the background information
+                fprintf([task.background,'\n'])
+                fprintf('=====================================================\n\n')
             end
-        end
-        
-        switch task.type
-            case 'string'
-                % Check if the input matches the possible answers registered. If
-                % yes, then print a congratulatory message and update the progress.
-                % If not then ask the question again
-                correct = find(ismember(task.evaluation, answer));
-            case 'commands'
-                % Do several evaluations to check if the code is behaving
-                % the way it should. The evaluations should all give a 1 if
-                % they are successful or 0 if they are not. If a 0 is
-                % generated the evaluation sequence is stopping.
-                correct = 1;
-                command = 1;
+
+            % Providing the option to go back one question and practise
+            % again
+            fprintf('Type ''previous'' for going one question back, ''background'' for reading the background again, or exit to leave the tutorial\n\n')
+
+            % Print the question and wait for input from the user
+            answer = input(['Question ',num2str(level),':\n\n',task.question,': '],'s');
+
+            % Going back a level, if the user wants to
+            switch answer
+                case 'previous'
+                    level = max(level-1,1);
+                    continue
+                case 'exit'
+                    return
+                case 'background'
+                    repeat = 0;
+                    continue
+            end
+
+            % Pre-evaluation events, in case some workspace preparation is
+            % needed
+            for command=task.preeval
                 try
-                    eval(answer)
+                    eval([command{:},';'])
                 catch e
                     fprintf(2,'MATLAB error message:\n%s \n',e.message);
-                    fname=e.stack.name;
+                    fname=e.stack.name; 
                     if ~(strcmp(fname,'tutorial')==1)
                         l=e.stack.line;
                         fprintf(2,'Error in %s.m file, at line %d\n',fname, l);
                     end
-                    correct = 0;
                 end
-                while (command<=length(task.evaluation) && correct>0)
+            end
+
+            switch task.type
+                case 'string'
+                    % Check if the input matches the possible answers registered. If
+                    % yes, then print a congratulatory message and update the progress.
+                    % If not then ask the question again
+                    correct = find(ismember(task.evaluation, answer));
+                case 'commands'
+                    % Do several evaluations to check if the code is behaving
+                    % the way it should. The evaluations should all give a 1 if
+                    % they are successful or 0 if they are not. If a 0 is
+                    % generated the evaluation sequence is stopping.
+                    correct = 1;
+                    command = 1;
                     try
-                        correct = eval(task.evaluation{command})*correct;
-                        command = command+1;
+                        eval(answer)
                     catch e
                         fprintf(2,'MATLAB error message:\n%s \n',e.message);
-                        fname=e.stack.name; 
+                        fname=e.stack.name;
                         if ~(strcmp(fname,'tutorial')==1)
                             l=e.stack.line;
                             fprintf(2,'Error in %s.m file, at line %d\n',fname, l);
                         end
                         correct = 0;
-                        break
                     end
-                end
-        end
-        
-        % Post-evaluation events, in case some cleaning-up is required
-        for command=task.posteval
-            try
-                eval([command{:},';'])
-            catch e
-                fprintf(2,'MATLAB error message:\n%s \n',e.message);
-                fname=e.stack.name; 
-                if ~(strcmp(fname,'tutorial')==1)
-                    l=e.stack.line;
-                    fprintf(2,'Error in %s.m file, at line %d\n',fname, l);
-                end  
+                    while (command<=length(task.evaluation) && correct>0)
+                        try
+                            correct = eval(task.evaluation{command})*correct;
+                            command = command+1;
+                        catch e
+                            fprintf(2,'MATLAB error message:\n%s \n',e.message);
+                            fname=e.stack.name; 
+                            if ~(strcmp(fname,'tutorial')==1)
+                                l=e.stack.line;
+                                fprintf(2,'Error in %s.m file, at line %d\n',fname, l);
+                            end
+                            correct = 0;
+                            break
+                        end
+                    end
             end
-        end
-        
-        if all(correct)
-            cmessage = randperm(numel(congrats)); %#ok<USENS> Loaded at the beginning of the function
-            fprintf([congrats{cmessage(1)},'\n\nPress enter to continue\n\n'])
-            level = level+1;
-            progress.(user) = level;
-            save('progress.mat','progress')
-            repeat = 0;
-            pause
+
+            % Post-evaluation events, in case some cleaning-up is required
+            for command=task.posteval
+                try
+                    eval([command{:},';'])
+                catch e
+                    fprintf(2,'MATLAB error message:\n%s \n',e.message);
+                    fname=e.stack.name; 
+                    if ~(strcmp(fname,'tutorial')==1)
+                        l=e.stack.line;
+                        fprintf(2,'Error in %s.m file, at line %d\n',fname, l);
+                    end  
+                end
+            end
+
+            if all(correct)
+                cmessage = randperm(numel(congrats)); %#ok<USENS> Loaded at the beginning of the function
+                fprintf([congrats{cmessage(1)},'\n\nPress enter to continue\n\n'])
+                level = level+1;
+                progress.(user) = level;
+                save('progress.mat','progress')
+                repeat = 0;
+                pause
+            else
+                rmessage = randperm(numel(retry)); %#ok<USENS> Loaded at the beginning of the function
+                fprintf([retry{rmessage(1)},'\n\n'])
+                repeat = 1;
+            end
         else
-            rmessage = randperm(numel(retry)); %#ok<USENS> Loaded at the beginning of the function
-            fprintf([retry{rmessage(1)},'\n\n'])
-            repeat = 1;
+            level = level+1;
+            repeat = 0;
         end
     end
     
@@ -161,4 +176,10 @@ function tutorial
     sound(handel.y,handel.Fs)
     fprintf(['\n\nWell done! You have completed all the questions!\nYou are now ready to dive deeper into MATLAB and become a guru one day!\n',...
             'We hope you enjoyed. You can find updates of this tutorial on our github repository https://www.github.com/tassos/matlab_tutorial\n\n'])
+end
+
+%% Resume
+% Callback to resume operation after user has made her choices
+function hDoneCallback(~, ~)
+    uiresume
 end
