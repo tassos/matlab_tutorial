@@ -31,6 +31,7 @@ Question1:
   * evaluation: [an array of correct answers, or commands to be evaluated]
   * preeval: [an array of commands to be executed before the evaluation]
   * posteval: [an array of commands to be executed after the evaluation]
+  * courses: [an array of courses, for which the question is valid]
 
 ### Background
 
