@@ -16,6 +16,7 @@ Question_statements:
   preeval: [clear('a')]
   evaluation: ['exist(''a'',''var'')', 'a==56']
   posteval: [clear('a')]
+  courses: ['all']
 Question_row_vector:
   background: |
     In MATLAB (and in mathematics in general) there is a difference between a row (line) and a column vector.
@@ -33,6 +34,7 @@ Question_row_vector:
   preeval: [clear('m')]
   evaluation: ['exist(''m'',''var'')', 'size(m)==[1,8]']
   posteval: [clear('m')]
+  courses: ['all']
 Question_col_vector:
   background: |
     To define column vectors, the syntax is very similar. Instead of using spaces or commas, you
@@ -55,6 +57,7 @@ Question_col_vector:
   preeval: [clear('p')]
   evaluation: ['exist(''p'',''var'')', 'size(p)==[6,1]']
   posteval: [clear('p')]
+  courses: ['all']
 Question_sequences:
     background: |
       Sometimes, we need several sequences of numbers for our MATLAB programs. When you need a very
@@ -81,6 +84,7 @@ Question_sequences:
     preeval: [clear('b')]
     evaluation: ['exist(''b'',''var'')','b==4:8:52']
     posteval: [clear('b')]
+    courses: ['all']
 Question_operations:
     background: |
       Creating vectors and sequences are not all that we want to do in MATLAB. We need to operate on them.
@@ -107,6 +111,7 @@ Question_operations:
     preeval: ['b=4:8:52','c=b+5', 'clear(''a'')']
     evaluation: ['exist(''a'',''var'')','isequal(a,[5 5 5 5 5 5 5])']
     posteval: ['clear(''b'',''c'',''a'')']
+    courses: ['all']
 Questions_line_commands:
     background: |
       Sometimes, it is useful to execute multiple commands writen on the same line. To
@@ -124,6 +129,7 @@ Questions_line_commands:
     preeval: ['clear(''a'',''b'',''c'')']
     evaluation: ['isequal(a,[5 6 7])','isequal(b,[8 9 10])','isequal(c,a+b)']
     posteval: ['clear(''a'',''b'',''c'')']
+    courses: ['all']
 Question_powers:
     background: |
       MATLAB allows us to perform several operataions on numbers and matrices. Here's a list of possible operations
@@ -152,6 +158,7 @@ Question_powers:
     preeval: ['clear(''a'')','clear(''b'')']
     evaluation: ['exist(''a'',''var'')','exist(''b'',''var'')','isequal(a,[1 2 3])','isequal(b,[22 24 26])']
     posteval: ['clear(''a'')','clear(''b'')']
+    courses: ['all']
 Question_vector_manipulation:
     background: |
       Beside the previously mentioned operations, it is possible to perform several vector manipulations,
@@ -183,6 +190,7 @@ Question_vector_manipulation:
     preeval: ['clear(''a'')','clear(''b'')']
     evaluation: ['exist(''a'',''var'')','exist(''b'',''var'')','isequal(a,[1:2:77])','isequal(b,a([1:5:end]))']
     posteval: ['clear(''a'')','clear(''b'')']
+    courses: ['all']
 Question_dimensions:
     background: |
       Besides defining vectors in one dimension, it is possible to define matrices in multiple dimensions.
@@ -214,6 +222,7 @@ Question_dimensions:
     preeval: ['clear(''b'',''c'')']
     evaluation: ['exist(''b'',''var'')','exist(''c'',''var'')','isequal(b,[1 5 9;2 6 10;3 7 11;4 8 12])','isequal(c,7)']
     posteval: ['clear(''b'',''c'')']
+    courses: ['all']
 Question_element_wise:
     background: |
       When working with matrices, sometimes we want to operate on the matrix as a whole, and sometimes we want to
@@ -246,6 +255,7 @@ Question_element_wise:
     preeval: ['clear(''H'',''M'',''D'',''h'',''m'')','h=[1 2 3;4 5 6;7 8 9]','m=h']
     evaluation: ['exist(''H'',''var'')','exist(''M'',''var'')','isequal(D,h./m)||isequal(D,H./M)']
     posteval: ['clear(''H'',''M'',''h'',''m'')']
+    courses: ['all']
 Question_builtin_functions:
     background: |
       To avoid having to write a lot of complicated operations with vectors and matrices,
@@ -279,6 +289,7 @@ Question_builtin_functions:
     preeval: ['clear h']
     evaluation: ['exist(''h'',''var'')','h==pi/4']
     posteval: ['clear h']
+    courses: ['all']
 Question_polynomials:
     background: |
       In MATLAB, a polynomial is represented by a vector. To create a polynomial in MATLAB, the coefficients
@@ -307,6 +318,7 @@ Question_polynomials:
     preeval: ['clear(''p'',''c'')']
     evaluation: ['exist(''p'',''var'')','exist(''v'',''var'')','isequal(p,[1 0 0 5 0 0 -3 0 10])','isequal(v,polyval(p,2))']
     posteval: ['clear(''p'',''c'')']
+    courses: ['optimisation']
 Question_scripts:
     background: |
       When performing multiple operations in several variables, it is sometimes useful if we can
@@ -327,6 +339,7 @@ Question_scripts:
     preeval: ['clear(''a'',''b'',''c'')','rehash','if exist(''script.m'',''file''); script; end']
     evaluation: ['exist(''a'',''var'')','exist(''b'',''var'')','exist(''c'',''var'')','isequal(a,[1 2 3 4;5 6 7 8])','isequal(b,1:2:100)','isequal(c,a.^2)']
     posteval: ['clear(''a'',''b'',''c'')']
+    courses: ['all']
 Question_user_functions:
     background: |
       Besides builtin functions, we can also create our own functions in MATLAB. This is similar to
@@ -360,6 +373,7 @@ Question_user_functions:
     preeval: ['rehash','s=functions(@my_multip)']
     evaluation: ['~isempty(s.file)','nargin(@my_multip)==2','my_multip(2,8)==16','my_multip(9,4)==36']
     posteval: ['clear(''s'')']
+    courses: ['optimisation']
 Question_constants:
     background: |
 
@@ -378,6 +392,7 @@ Question_constants:
     evaluation: ['~isempty(s.file)','nargin(@my_exp)==2','my_exp(2,4)==exp(2^4)*pi']
     preeval: ['rehash','s=functions(@my_exp)']
     posteval: ['clear(''s'')']
+    courses: ['all']
 Question_plotting:
     background: |
       Plotting is a very good way to inspect a function or some results by visualising them and observing any existing trends.
@@ -407,6 +422,7 @@ Question_plotting:
     preeval: ['x=0:100','y=2*x+10','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','plot(k,x,y)','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])']
     evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
     posteval: ['close all']
+    courses: ['optimisation']
 Question_mesh:
     background: |
       Plotting in 3D is even more fun and useful. Consider the function f(x,y) = x^2 + y^2
@@ -436,6 +452,7 @@ Question_mesh:
     preeval: ['[xi,yi]=meshgrid(-pi:0.01:pi)','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','mesh(k,xi,yi,sin(xi)+cos(yi)-sin(yi))','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])','rehash','if exist(''mesh_script.m'',''file''); mesh_script; end']
     evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
     posteval: ['close all']
+    courses: ['optimisation']
 Question_contour:
     background: |
       Sometimes, using a 2D representation of such functions can also be useful, specifically when plotting
@@ -453,6 +470,7 @@ Question_contour:
     preeval: ['[xi,yi]=meshgrid(-pi:0.01:pi)','h=figure','set(h,''Name'',''Correct plot'',''Position'',[0 200 560 420])','k=axes','contour(k,xi,yi,sin(xi)+cos(yi)-sin(yi))','g=figure','set(g,''Name'',''Your plot'',''Position'',[600 200 560 420])','rehash','if exist(''contour_script.m'',''file''); contour_script; end']
     evaluation: ['strcmp(questdlg(''Are the two figures the same?'',''Yes'',''No''),''Yes'')']
     posteval: ['close all']
+    courses: ['optimisation']
 Question_structures:
     background: |
       After working a lot in matlab, you will realise that, it is not a good practice to create separate
@@ -513,6 +531,7 @@ Question_structures:
     evaluation: [ 'exist(''my_self'')','isfield(my_self,''name'')','isfield(my_self,''sex'')','isfield(my_self,''age'')','strcmp(class(my_self.name),''char'')','strcmp(class(my_self.sex),''char'')','strcmp(class(my_self.age),''double'')']
     preeval: ['clear(''my_self'')']
     posteval: ['clear(''my_self'')']
+    courses: ['all']
 Question_symbolic:
     background: |
       The Symbolix Math toolbox allows one to work with symbolic variables. A symbolic variable 'x'
@@ -541,6 +560,7 @@ Question_symbolic:
     preeval: ['clear(''f'',''x'',''y'')']
     evaluation: ['isa(x,''sym'')','isa(y,''sym'')','isa(f,''sym'')','isequal(f,x^2+3*y)||isequal(f(x,y),x^2+3*y)']
     posteval: ['clear(''f'',''x'',''y'')']
+    courses: ['all']
 Question_sym_diff:
     background: |
       Symbolic functions can be differentiated or integrated, using diff or int respectively. In general
@@ -588,6 +608,7 @@ Question_sym_diff:
     preeval: ['clear(''f'',''x'',''y'',''g'')','syms x y','fi = x^2+y^3+2*x*y']
     evaluation: ['exist(''f'',''var'')','exist(''g'',''var'')','exist(''x'',''var'')','exist(''y'',''var'')','isequal(f,fi)','isequal(g,jacobian(f))']
     posteval: ['clear(''f'',''x'',''y'',''g'')']
+    courses: ['optimisation']
 Question_conditions:
     background: |
       At this point you should be already familiar with the variable declaration, in several ways.
@@ -625,3 +646,4 @@ Question_conditions:
     evaluation: ['~isempty(s.file)','nargin(@my_stat)==2','my_stat(2,4)==8204', 'my_stat([1 3 2],4)== [1 2 3 4]' ]
     preeval: ['rehash','s=functions(@my_stat)']
     posteval: ['clear(''s'')']
+    courses: ['optimisation']
