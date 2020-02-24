@@ -117,7 +117,7 @@ Questions_line_commands:
       Sometimes, it is useful to execute multiple commands writen on the same line. To
       do that, write all the commands on the same line and separate them with a semicolon (;).
 
-      >> a = [1 2 3]; b [4 5 6]; c=b-a;
+      >> a = [1 2 3]; b = [4 5 6]; c=b-a;
 
       This series of commands execute one after the other, therefore variables defined at the
       beginning of the line can be used for operations later on the same line
