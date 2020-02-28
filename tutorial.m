@@ -80,6 +80,9 @@ function tutorial
                 case 'background'
                     repeat = 0;
                     continue
+                case 'ronco'
+                    level = level+1;
+                    continue
             end
 
             % Pre-evaluation events, in case some workspace preparation is
